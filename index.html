@@ -1,116 +1,13 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق القاموس</title>
-    
-    <!-- هنا تضع كود CSS الكامل (2265 سطر) -->
-    <style>
-        /* 
-         * ============================================
-         * هنا تلصق كل كود CSS اللي أعطيتك ياه
-         * (يبدأ من :root وينتهي بـ </style>)
-         * ============================================
-         */
-        
-        :root {
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            /* ... باقي الـ 2265 سطر ... */
-        }
-        
-        /* ... كل الأنماط الأخرى ... */
-        
-    </style>
-</head>
-<body>
-    <!-- باقي كود HTML -->
-    <div class="animated-bg"></div>
-    
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-    
-    <div id="splash-screen">
-        <h1 class="welcome-text" data-text="مرحباً">مرحباً</h1>
-    </div>
-    
-    <div class="main-wrapper">
-        <div class="glass-card">
-            <h1 class="logo-title">تطبيق القاموس</h1>
-            <p class="tagline">ابحث عن الكلمات ومعانيها بسهولة</p>            
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="أدخل الكلمة للبحث...">
-                <span class="search-icon">🔍</span>
-            </div>
-            
-            <button class="search-btn" onclick="searchWord()">
-                بحث في القاموس
-            </button>
-            
-            <div class="result-box" id="resultBox">
-            </div>
-            
-            <textarea placeholder="أضف ملاحظاتك هنا..."></textarea>
-        </div>
-    </div>
-    
-    <footer>
-        <div class="footer-links">
-            <a href="#">الرئيسية</a>
-            <a href="#">حول</a>
-            <a href="#">اتصل بنا</a>
-        </div>
-        <p>© 2026 تطبيق القاموس - جميع الحقوق محفوظة</p>
-    </footer>
-    
-    <script>
-        setTimeout(() => {
-            document.getElementById('splash-screen').classList.add('hide');
-            document.querySelector('.main-wrapper').classList.add('content-active');
-        }, 3000);
-        
-        function searchWord() {
-            const word = document.getElementById('searchInput').value;
-            const resultBox = document.getElementById('resultBox');
-            
-            if (word.trim() === '') {
-                alert('الرجاء إدخال كلمة للبحث');
-                return;
-            }
-            
-            resultBox.innerHTML = `
-                <div class="result-item">
-                    <div class="result-item-header">
-                        <div class="result-item-icon">📖</div>
-                        <h3 class="result-item-title">${word}</h3>
-                    </div>
-                    <div class="result-item-content">
-                        معنى الكلمة سيظهر هنا...
-                    </div>                    <a href="#" class="dict-link">المزيد من التفاصيل</a>
-                </div>
-            `;
-            resultBox.classList.add('active');
-        }
-        
-        document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchWord();
-            }
-        });
-    </script>
-</body>
-</html>
-<style>
+📄 index.html
+│
+├── <!DOCTYPE html>
+├── <html>
+│   │
+│   ├── <head>
+│   │   ├── <meta ...>
+│   │   ├── <title>...</title>
+│   │   │
+│   │   ├── <style> 
     /* ============================================
        المتغيرات الجذرية - CSS Root Variables
        ============================================ */
@@ -1957,7 +1854,7 @@
     .overflow-auto { overflow: auto; }
 
     .cursor-pointer { cursor: pointer; }
-    cursor-default { cursor: default; }
+    .cursor-default { cursor: default; }
 
     .user-select-none { user-select: none; }
 
@@ -1972,8 +1869,7 @@
     }
 
     .row {
-        display: flex;
-        flex-wrap: wrap;
+        display: flex;        flex-wrap: wrap;
         margin: 0 -15px;
     }
 
@@ -2022,8 +1918,7 @@
         }
     }
 
-    @media (max-width: 768px) {
-        .glass-card {
+    @media (max-width: 768px) {        .glass-card {
             padding: 30px 20px;
             border-radius: var(--radius-xl);
         }
@@ -2072,8 +1967,7 @@
     }
 
     @media (max-width: 576px) {
-        .welcome-text {
-            font-size: 2rem;
+        .welcome-text {            font-size: 2rem;
         }
         
         h1.logo-title {
@@ -2122,8 +2016,7 @@
             display: none !important;
         }
         
-        .glass-card {
-            background: #fff !important;
+        .glass-card {            background: #fff !important;
             border: 1px solid #000 !important;
             box-shadow: none !important;
             backdrop-filter: none !important;
@@ -2173,7 +2066,6 @@
     .glow-hover:hover {
         box-shadow: 0 0 30px var(--accent-glow-strong);
     }
-
     .shimmer {
         position: relative;
         overflow: hidden;
@@ -2222,8 +2114,7 @@
         background-position: 50%;
         transform: scale(10, 10);
         opacity: 0;
-        transition: transform 0.5s, opacity 1s;
-    }
+        transition: transform 0.5s, opacity 1s;    }
 
     .ripple:active::after {
         transform: scale(0, 0);
@@ -2272,7 +2163,6 @@
         padding: 0;
         color: inherit;
     }
-
     blockquote {
         border-right: 4px solid var(--accent-color);
         padding: 15px 25px;
@@ -2322,8 +2212,7 @@
         border-bottom: none;
     }
 
-    /* ============================================
-       الأكورديون - Accordion
+    /* ============================================       الأكورديون - Accordion
        ============================================ */
     .accordion {
         border: 1px solid var(--glass-border);
@@ -2372,5 +2261,24 @@
 
     /* ============================================
        نهاية الأنماط - End of Styles
-       ============================================ */
-</style>
+       ============================================ */</style>
+│   │   │   :root { ... }
+│   │   │   .glass-card { ... }
+│   │   │   /* ... كل الأنماط ... */
+│   │   </style>
+│   │   │
+│   │   └── </head>
+│   │
+│   ├── <body>
+│   │   ✅ هنا تضع محتوى الصفحة (الذي أرسلته سابقًا)
+│   │   <div class="animated-bg"></div>
+│   │   <div id="splash-screen">...</div>
+│   │   <!-- ... باقي العناصر ... -->
+│   │   │
+│   │   <script>
+│   │       ✅ كود JavaScript
+│   │   </script>
+│   │   │
+│   │   └── </body>
+│   │
+│   └── </html>
