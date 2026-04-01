@@ -14,9 +14,9 @@
         .word-title { font-size: 26px; color: #d32f2f; font-weight: bold; display: block; }
         .cambridge-btn { 
             display: block; width: 100%; padding: 15px; margin-top: 20px; 
-            background: #002e5d; color: #ffca28; text-decoration: none; 
+            background: #002e5d; color: #ffca28 !important; text-decoration: none; 
             border-radius: 10px; font-weight: bold; font-size: 16px; 
-            border: 2px solid #ffca28;
+            border: 2px solid #ffca28; box-sizing: border-box;
         }
         .cambridge-btn:hover { background: #001f40; }
         .audio-btn { background: #4caf50; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }
@@ -41,36 +41,36 @@
             
             if (!word) { alert("يرجى إدخال كلمة"); return; }
             resultArea.style.display = "block";
-            resultArea.innerHTML = "جاري تحضير الرابط المعتمد...";
+            resultArea.innerHTML = "جاري جلب البيانات...";
 
             try {
                 const response = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word);
                 const data = await response.json();
 
-                // رابط كامبريدج (إنجليزي-عربي) المباشر للكلمة
+                // هذا هو الرابط الذي سيفتح صفحة الترجمة العربية في كامبريدج
                 const cambridgeUrl = `https://dictionary.cambridge.org/dictionary/english-arabic/${word}`;
 
                 if (data.title === "No Definitions Found") {
                     resultArea.innerHTML = `
-                        <div style="color: red; margin-bottom: 10px;">❌ لم نجد الكلمة في المختصر، جرب القاموس الكامل:</div>
-                        <a href="${cambridgeUrl}" target="_blank" class="cambridge-btn">فتح البحث في Cambridge Dictionary</a>
+                        <div style="color: red; margin-bottom: 10px;">لم نجد تعريفاً سريعاً، جرب القاموس الكامل:</div>
+                        <a href="${cambridgeUrl}" target="_blank" class="cambridge-btn">فتح صفحة الترجمة في Cambridge</a>
                     `;
                 } else {
                     const def = data[0].meanings[0].definitions[0].definition;
                     resultArea.innerHTML = `
                         <span class="word-title">${word.toUpperCase()}</span>
-                        <div style="margin-top:10px;"><b>المعنى السريع (EN):</b><br>${def}</div>
+                        <div style="margin-top:10px;"><b>المعنى بالإنجليزي:</b><br>${def}</div>
                         <button class="audio-btn" onclick="playAudio('${word}')">🔊 استمع للنطق</button>
                         
                         <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
                         
                         <a href="${cambridgeUrl}" target="_blank" class="cambridge-btn">
-                            📖 عرض الترجمة العربية المعتمدة (Cambridge)
+                             📖 عرض الترجمة العربية في Cambridge
                         </a>
                     `;
                 }
             } catch (e) {
-                resultArea.innerHTML = "⚠️ حدث خطأ، تأكد من الاتصال بالإنترنت.";
+                resultArea.innerHTML = "⚠️ تأكد من الاتصال بالإنترنت.";
             }
         }
 
