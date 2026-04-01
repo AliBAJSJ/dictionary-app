@@ -4,90 +4,46 @@
     <meta charset="UTF-8">
     <title>مساعد كامبريدج الذكي</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; text-align: center; padding: 20px; direction: rtl; }
+        body { font-family: sans-serif; background-color: #f0f2f5; text-align: center; padding: 20px; direction: rtl; }
         .card { background: white; max-width: 500px; margin: auto; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #1a237e; margin-bottom: 10px; }
-        input { padding: 12px; width: 65%; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 10px; font-size: 16px; }
+        h1 { color: #1a237e; }
+        input { padding: 12px; width: 70%; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 10px; font-size: 16px; }
         button { padding: 12px 20px; background: #1a237e; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        #result-area { margin-top: 20px; text-align: right; padding: 15px; background: #f9f9f9; border-radius: 10px; min-height: 50px; border: 1px solid #eee; }
-        .history-section { margin-top: 20px; text-align: right; border-top: 1px solid #eee; padding-top: 10px; }
-        .history-tag { display: inline-block; background: #e3f2fd; color: #1a237e; padding: 5px 10px; border-radius: 15px; margin: 3px; font-size: 13px; cursor: pointer; }
-        .word { font-size: 22px; color: #d32f2f; font-weight: bold; }
+        #result-area { margin-top: 20px; text-align: right; padding: 15px; background: #f9f9f9; border-radius: 10px; min-height: 50px; border: 1px solid #eee; line-height: 1.6; }
+        .word { font-size: 24px; color: #d32f2f; font-weight: bold; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-
     <div class="card">
         <h1>مساعد كامبريدج الذكي 🔎</h1>
-        <p style="color: #666;">اكتب كلمة بالإنجليزية واضغط بحث</p>
-        
+        <p>اكتب كلمة بالإنجليزية واضغط بحث</p>
         <input type="text" id="userInput" placeholder="مثلاً: Success">
         <button onclick="getTranslation()">بحث الآن</button>
-
-        <div id="result-area">
-            النتائج ستظهر هنا...
-        </div>
-
-        <div class="history-section">
-            <strong>آخر عمليات البحث:</strong>
-            <div id="historyList"></div>
-        </div>
+        <div id="result-area">النتائج ستظهر هنا...</div>
     </div>
 
     <script>
-        let searchHistory = [];
-
         async function getTranslation() {
             const word = document.getElementById('userInput').value.trim();
             const resultArea = document.getElementById('result-area');
-
-            if (!word) {
-                alert("اكتب الكلمة أولاً");
-                return;
-            }
-
-            resultArea.innerHTML = "جاري جلب البيانات...";
+            if (!word) { alert("يرجى كتابة كلمة أولاً"); return; }
+            resultArea.innerHTML = "جاري جلب البيانات من القواميس الموثوقة...";
 
             try {
                 const response = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word);
                 const data = await response.json();
-
                 if (data.title === "No Definitions Found") {
                     resultArea.innerHTML = "❌ لم نجد الكلمة، تأكد من الإملاء.";
                 } else {
                     const definition = data[0].meanings[0].definitions[0].definition;
                     const partOfSpeech = data[0].meanings[0].partOfSpeech;
-                    
                     resultArea.innerHTML = 
-                        "<div class='word'>" + word.toUpperCase() + "</div>" +
-                        "<div><b>التصنيف:</b> " + partOfSpeech + "</div>" +
-                        "<div style='margin-top:10px;'><b>المعنى (EN):</b> " + definition + "</div>" +
-                        "<button onclick='playAudio()' style='background:#4CAF50; margin-top:10px; padding:5px 10px;'>🔊 استمع للنطق</button>";
-                    
-                    addToHistory(word);
+                        '<div class="word">' + word.toUpperCase() + '</div>' +
+                        '<div><b>نوع الكلمة:</b> ' + partOfSpeech + '</div>' +
+                        '<div style="margin-top:10px;"><b>المعنى بالإنجليزية:</b> ' + definition + '</div>' +
+                        '<button onclick="playAudio()" style="background:#4CAF50; margin-top:15px; padding:8px 15px;">🔊 استمع للنطق</button>';
                 }
-            } catch (error) {
-                resultArea.innerHTML = "⚠️ تأكد من الاتصال بالإنترنت.";
-            }
-        }
-
-        function addToHistory(word) {
-            if (!searchHistory.includes(word)) {
-                searchHistory.unshift(word); // إضافة الكلمة في البداية
-                if (searchHistory.length > 5) searchHistory.pop(); // الاحتفاظ بآخر 5 كلمات فقط
-                updateHistoryUI();
-            }
-        }
-
-        function updateHistoryUI() {
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = "";
-            searchHistory.forEach(item => {
-                historyList.innerHTML += <span class="history-tag" onclick="quickSearch('${item}')">${item}</span>;
-            });
-        }function quickSearch(word) {
-            document.getElementById('userInput').value = word;
-            getTranslation();
+            } catch (error) { resultArea.innerHTML = "⚠️ تأكد من الاتصال بالإنترنت."; }
         }
 
         function playAudio() {
@@ -99,3 +55,4 @@
     </script>
 </body>
 </html>
+
