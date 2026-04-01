@@ -3,211 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المعجم الرقمي | Digital Lexicon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Sans+Arabic:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>المعجم الذكي Pro | النسخة السينمائية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Cairo:wght@300;700;900&display=swap" rel="stylesheet">
+    
     <style>
+        /* المتغيرات اللونية المتطورة */
         :root {
-            --primary: #2563eb;
-            --text-main: #1f2937;
-            --text-sub: #6b7280;
-            --bg: #ffffff;
-            --border: #e5e7eb;
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --bg-dark: #020617;
+            --glass: rgba(15, 23, 42, 0.65);
+            --border-white: rgba(255, 255, 255, 0.1);
+            --neon-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
         }
 
-        body {
-            font-family: 'Noto Sans Arabic', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        * {
+            box-sizing: border-box;
+            cursor: default;
         }
 
-        .main-container {
-            width: 90%;
-            max-width: 700px;
-            padding: 40px;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            color: #fff;
+            overflow-x: hidden;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
+        /* تأثير الخلفية الفضائية المتحركة */
+        .space-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at bottom right, #1e1b4b, #020617);
+            z-index: -2;
         }
 
-        header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin: 0;
-            color: var(--text-main);
+        .stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: transparent url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/123163/stars.png') repeat;
+            z-index: -1;
+            opacity: 0.5;
+            animation: moveStars 100s linear infinite;
         }
 
-        header p {
-            color: var(--text-sub);
-            font-size: 14px;
-            margin-top: 8px;
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 10000px 5000px; }
         }
 
-        .search-box {
-            position: relative;
-            display: flex;
-            gap: 12px;
+        /* شاشة الترحيب المطورة */
+        #splash-screen {
+            position: fixed; inset: 0;
+            background: #000;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 10000;
+            transition: all 1.2s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
-        input {
-            flex: 1;
-            padding: 16px 20px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            font-size: 16px;
-            outline: none;
-            transition: 0.2s;
-        }
-
-        input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        }
-
-        button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0 24px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 15px;
-            transition: 0.2s;
-        }
-
-        button:hover {
-            background-color: #1d4ed8;
-        }
-
-        .results {
-            margin-top: 30px;
-            display: none;
-            border-top: 1px solid var(--border);
-            padding-top: 30px;
-        }
-
-        .dictionary-card {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 12px;
+        .welcome-loader {
+            width: 80px; height: 80px;
+            border: 4px solid var(--border-white);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
             margin-bottom: 20px;
         }
 
-        .dictionary-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-            display: block;
+        .welcome-text {
+            font-size: 4rem; font-weight: 900;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(to right, #6366f1, #ec4899, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
+            animation: textReveal 2s ease forwards;
+            letter-spacing: -2px;
         }
 
-        .open-btn {
-            display: inline-block;
-            margin-top: 12px;
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes textReveal {
+            0% { opacity: 0; letter-spacing: 20px; filter: blur(10px); }
+            100% { opacity: 1; letter-spacing: 2px; filter: blur(0); }
         }
 
-        .notes-section {
-            margin-top: 20px;
+        /* الحاوية الرئيسية بتأثير زجاجي متقدم */
+        .main-wrapper {
+            opacity: 0; transform: scale(0.95);
+            padding: 60px 20px;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh;
+            transition: 1.5s ease;
         }
 
-        label {
-            font-size: 13px;
-            color: var(--text-sub);
-            margin-bottom: 8px;
-            display: block;
+        .content-active { opacity: 1; transform: scale(1); }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--border-white);
+            border-radius: 40px;
+            padding: 60px;
+            width: 100%; max-width: 850px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
         }
+
+        /* توهج زوايا الكارت */
+        .glass-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, var(--primary), transparent, var(--secondary), transparent);
+            animation: rotateGlow 10s linear infinite;
+            opacity: 0.1; z-index: -1;
+        }
+
+        @keyframes rotateGlow { to { transform: rotate(360deg); } }
+
+        .logo-title {
+            font-size: 3.2rem; font-weight: 900; margin: 0;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* حقل البحث المتوهج */
+        .search-group {
+            margin-top: 50px; position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%; padding: 25px 35px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--border-white);
+            border-radius: 25px;
+            color: #fff; font-size: 1.3rem;
+            outline: none; transition: 0.4s;
+            text-align: center;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+            background: rgba(0,0,0,0.5);
+        }
+
+        .action-btn {
+            margin-top: 25px; width: 100%; padding: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none; border-radius: 25px;
+            color: #fff; font-weight: 800; font-size: 1.2rem;
+            cursor: pointer; position: relative; overflow: hidden;
+        }
+
+        .action-btn::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .action-btn:hover::after { transform: translateX(100%); }
+        .action-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(236, 72, 153, 0.3); }
+
+        /* منطقة النتائج */
+        .result-container {
+            display: none; margin-top: 50px;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-pill {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-white);
+            padding: 30px; border-radius: 25px;
+            text-align: right; margin-bottom: 25px;
+        }
+
+        .dict-link-btn {
+            display: inline-flex; align-items: center;
+            padding: 12px 25px; background: rgba(6, 182, 212, 0.1);
+            color: var(--accent); text-decoration: none;
+            border-radius: 15px; font-weight: 700; margin-top: 20px;
+            border: 1px solid var(--accent); transition: 0.3s;
+        }
+
+        .dict-link-btn:hover { background: var(--accent); color: #000; }
 
         textarea {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            resize: none;
-            font-size: 15px;
-            box-sizing: border-box;
-            background: #fff;
+            width: 100%; padding: 20px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-white);
+            border-radius: 20px; color: #fff;
+            font-size: 1.1rem; line-height: 1.6;
+            margin-top: 15px; outline: none;
         }
 
         footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 12px;
-            color: #9ca3af;
+            margin-top: 50px; color: rgba(255,255,255,0.2);
+            font-size: 0.9rem; font-weight: 300;
         }
+
+        /* لتعطيل الماوس على العناصر الجمالية */
+        .stars, .welcome-loader, .welcome-text { pointer-events: none; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <header>
-        <h1>المعجم الرقمي</h1>
-        <p>البحث في معجم Hans Wehr والمعاجم المعتمدة</p>
-    </header>
+    <div class="space-bg"></div>
+    <div class="stars"></div>
 
-    <div class="search-box">
-        <input type="text" id="query" placeholder="أدخل الكلمة أو الجذر...">
-        <button onclick="search()">بحث</button>
+    <div id="splash-screen">
+        <div class="welcome-loader"></div>
+        <div class="welcome-text">WELCOME</div>
     </div>
 
-    <div id="resultsArea" class="results">
-        <div class="dictionary-card">
-            <span class="dictionary-name">Hans Wehr Dictionary</span>
-            <p id="wordTitle" style="font-size: 18px; margin: 5px 0; font-weight: 600;"></p>
-            <a id="hansLink" href="#" target="_blank" class="open-btn">عرض الصفحة الكاملة في القاموس ←</a>
+    <div class="main-wrapper" id="main-content">
+        <div class="glass-card">
+            <h1 class="logo-title">المعجم الرقمي المطور</h1>
+            <p style="color: rgba(255,255,255,0.5); letter-spacing: 1px;">نظام تحليل النصوص وتحليل الجذور المتقدم</p>
+
+            <div class="search-group">
+                <input type="text" id="userInput" placeholder="أدخل المصطلح المراد تحليله..." autocomplete="off">
+                <button class="action-btn" onclick="startAnalysis()" style="cursor: pointer;">تـحـلـيـل الـمـصـطـلـح</button>
+            </div>
+
+            <div id="resultArea" class="result-container">
+                <div class="result-pill">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--secondary); font-weight: 800; font-size: 0.8rem;">HANS WEHR DATABASE</span>
+                        <h2 id="displayWord" style="margin: 0; font-size: 1.8rem; color: #fff;"></h2>
+                    </div>
+                    <p style="color: #94a3b8; margin-top: 10px;">تم العثور على تطابق في قاعدة البيانات العالمية للجذور العربية.</p>
+                    <a id="extLink" href="#" target="_blank" class="dict-link-btn" style="cursor: pointer;">📖 تصفح المرجع الأصلي</a>
+                </div>
+
+                <div style="text-align: right; padding: 0 10px;">
+                    <label style="color: var(--primary); font-weight: 700; font-size: 0.9rem;">📝 سجل بصيرتك التحليلية:</label>
+                    <textarea id="myNotes" rows="5" oninput="autoSave()" placeholder="اكتب هنا استنتاجاتك اللغوية..."></textarea>
+                </div>
+            </div>
         </div>
 
-        <div class="notes-section">
-            <label>ملاحظات إضافية حول المصطلح:</label>
-            <textarea id="notes" rows="5" oninput="saveLocal()" placeholder="سجل ملاحظاتك هنا..."></textarea>
-        </div>
+        <footer>
+            نظام المعجم الذكي | الإصدار السينمائي 2.0 | 2026
+        </footer>
     </div>
 
-    <footer>
-        أداة ترجمة شخصية | 2026
-    </footer>
-</div>
+    <script>
+        // نظام الترحيب الذكي
+        window.onload = () => {
+            const splash = document.getElementById('splash-screen');
+            const main = document.getElementById('main-content');
+            
+            setTimeout(() => {
+                splash.style.opacity = '0';
+                splash.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    main.classList.add('content-active');
+                }, 1200);
+            }, 2800);
+        };
 
-<script>
-    function search() {
-        const q = document.getElementById('query').value.trim();
-        if(!q) return;
+        function startAnalysis() {
+            const val = document.getElementById('userInput').value.trim();
+            if (!val) return;
 
-        document.getElementById('resultsArea').style.display = 'block';
-        document.getElementById('wordTitle').innerText = q;
-        
-        // ربط بمحرك المعاجم
-        document.getElementById('hansLink').href = `https://ejtaal.net/aa/#hw4=${q.toLowerCase()}`;
-        
-        // تحميل الملاحظات
-        const saved = localStorage.getItem('lex_note_' + q.toLowerCase());
-        document.getElementById('notes').value = saved || "";
-    }
+            const res = document.getElementById('resultArea');
+            const word = document.getElementById('displayWord');
+            const link = document.getElementById('extLink');
 
-    function saveLocal() {
-        const q = document.getElementById('query').value.trim().toLowerCase();
-        const note = document.getElementById('notes').value;
-        if(q) {
-            localStorage.setItem('lex_note_' + q, note);
+            res.style.display = 'block';
+            word.innerText = val.toUpperCase();
+            link.href = `https://ejtaal.net/aa/#hw4=${val.toLowerCase()}`;
+
+            // تحميل الملاحظات المحفوظة
+            const stored = localStorage.getItem('ultra_lex_' + val.toLowerCase());
+            document.getElementById('myNotes').value = stored || "";
         }
-    }
-</script>
 
+        function autoSave() {
+            const val = document.getElementById('userInput').value.trim().toLowerCase();
+            const note = document.getElementById('myNotes').value;
+            if (val) {
+                localStorage.setItem('ultra_lex_' + val, note);
+            }
+        }
+    </script>
 </body>
 </html>
-
