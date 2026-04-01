@@ -1,3 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق القاموس</title>
+    
+    <!-- هنا تضع كود CSS الكامل (2265 سطر) -->
+    <style>
+        /* 
+         * ============================================
+         * هنا تلصق كل كود CSS اللي أعطيتك ياه
+         * (يبدأ من :root وينتهي بـ </style>)
+         * ============================================
+         */
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            /* ... باقي الـ 2265 سطر ... */
+        }
+        
+        /* ... كل الأنماط الأخرى ... */
+        
+    </style>
+</head>
+<body>
+    <!-- باقي كود HTML -->
+    <div class="animated-bg"></div>
+    
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div id="splash-screen">
+        <h1 class="welcome-text" data-text="مرحباً">مرحباً</h1>
+    </div>
+    
+    <div class="main-wrapper">
+        <div class="glass-card">
+            <h1 class="logo-title">تطبيق القاموس</h1>
+            <p class="tagline">ابحث عن الكلمات ومعانيها بسهولة</p>            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="أدخل الكلمة للبحث...">
+                <span class="search-icon">🔍</span>
+            </div>
+            
+            <button class="search-btn" onclick="searchWord()">
+                بحث في القاموس
+            </button>
+            
+            <div class="result-box" id="resultBox">
+            </div>
+            
+            <textarea placeholder="أضف ملاحظاتك هنا..."></textarea>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="#">الرئيسية</a>
+            <a href="#">حول</a>
+            <a href="#">اتصل بنا</a>
+        </div>
+        <p>© 2026 تطبيق القاموس - جميع الحقوق محفوظة</p>
+    </footer>
+    
+    <script>
+        setTimeout(() => {
+            document.getElementById('splash-screen').classList.add('hide');
+            document.querySelector('.main-wrapper').classList.add('content-active');
+        }, 3000);
+        
+        function searchWord() {
+            const word = document.getElementById('searchInput').value;
+            const resultBox = document.getElementById('resultBox');
+            
+            if (word.trim() === '') {
+                alert('الرجاء إدخال كلمة للبحث');
+                return;
+            }
+            
+            resultBox.innerHTML = `
+                <div class="result-item">
+                    <div class="result-item-header">
+                        <div class="result-item-icon">📖</div>
+                        <h3 class="result-item-title">${word}</h3>
+                    </div>
+                    <div class="result-item-content">
+                        معنى الكلمة سيظهر هنا...
+                    </div>                    <a href="#" class="dict-link">المزيد من التفاصيل</a>
+                </div>
+            `;
+            resultBox.classList.add('active');
+        }
+        
+        document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchWord();
+            }
+        });
+    </script>
+</body>
+</html>
 <style>
     /* ============================================
        المتغيرات الجذرية - CSS Root Variables
