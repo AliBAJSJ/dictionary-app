@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مساعد كامبريدج الذكي</title>
     <style>
         body { font-family: sans-serif; background-color: #f0f2f5; text-align: center; padding: 20px; direction: rtl; }
@@ -10,7 +11,9 @@
         input { padding: 12px; width: 70%; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 10px; font-size: 16px; }
         button { padding: 12px 20px; background: #1a237e; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
         #result-area { margin-top: 20px; text-align: right; padding: 15px; background: #f9f9f9; border-radius: 10px; min-height: 50px; border: 1px solid #eee; line-height: 1.6; }
-        .word { font-size: 24px; color: #d32f2f; font-weight: bold; margin-bottom: 10px; }
+        .history-section { margin-top: 20px; text-align: right; border-top: 1px solid #eee; padding-top: 10px; font-size: 14px; }
+        .history-tag { display: inline-block; background: #e3f2fd; color: #1a237e; padding: 5px 10px; border-radius: 15px; margin: 3px; cursor: pointer; }
+        .word { font-size: 24px; color: #d32f2f; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -19,35 +22,73 @@
         <p>اكتب كلمة بالإنجليزية واضغط بحث</p>
         <input type="text" id="userInput" placeholder="مثلاً: Success">
         <button onclick="getTranslation()">بحث الآن</button>
+        
         <div id="result-area">النتائج ستظهر هنا...</div>
+
+        <div class="history-section">
+            <strong>آخر عمليات البحث:</strong>
+            <div id="historyList"></div>
+        </div>
     </div>
 
     <script>
+        let searchHistory = [];
+
         async function getTranslation() {
-            const word = document.getElementById('userInput').value.trim();
+            const wordInput = document.getElementById('userInput');
+            const word = wordInput.value.trim();
             const resultArea = document.getElementById('result-area');
+            
             if (!word) { alert("يرجى كتابة كلمة أولاً"); return; }
-            resultArea.innerHTML = "جاري جلب البيانات من القواميس الموثوقة...";
+            resultArea.innerHTML = "جاري البحث...";
 
             try {
                 const response = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word);
                 const data = await response.json();
+
                 if (data.title === "No Definitions Found") {
                     resultArea.innerHTML = "❌ لم نجد الكلمة، تأكد من الإملاء.";
                 } else {
                     const definition = data[0].meanings[0].definitions[0].definition;
                     const partOfSpeech = data[0].meanings[0].partOfSpeech;
+                    
                     resultArea.innerHTML = 
                         '<div class="word">' + word.toUpperCase() + '</div>' +
-                        '<div><b>نوع الكلمة:</b> ' + partOfSpeech + '</div>' +
-                        '<div style="margin-top:10px;"><b>المعنى بالإنجليزية:</b> ' + definition + '</div>' +
-                        '<button onclick="playAudio()" style="background:#4CAF50; margin-top:15px; padding:8px 15px;">🔊 استمع للنطق</button>';
+                        '<div><b>النوع:</b> ' + partOfSpeech + '</div>' +
+                        '<div style="margin-top:10px;"><b>المعنى:</b> ' + definition + '</div>' +
+                        '<button onclick="playAudio(\'' + word + '\')" style="background:#4CAF50; margin-top:15px; padding:8px 15px;">🔊 استمع</button>';
+                    
+                    addToHistory(word);
                 }
-            } catch (error) { resultArea.innerHTML = "⚠️ تأكد من الاتصال بالإنترنت."; }
+            } catch (error) {
+                resultArea.innerHTML = "⚠️ تأكد من الاتصال بالإنترنت.";
+            }
         }
 
-        function playAudio() {
-            const word = document.getElementById('userInput').value;
+        function addToHistory(word) {
+            if (!searchHistory.includes(word)) {
+                searchHistory.unshift(word);
+                if (searchHistory.length > 5) searchHistory.pop();
+                updateHistoryUI();
+            }
+        }
+
+        function updateHistoryUI() {
+            const historyList = document.getElementById('historyList');
+            if(historyList) {
+                historyList.innerHTML = "";
+                searchHistory.forEach(item => {
+                    historyList.innerHTML += '<span class="history-tag" onclick="quickSearch(\'' + item + '\')">' + item + '</span>';
+                });
+            }
+        }
+
+        function quickSearch(word) {
+            document.getElementById('userInput').value = word;
+            getTranslation();
+        }
+
+        function playAudio(word) {
             const utterance = new SpeechSynthesisUtterance(word);
             utterance.lang = 'en-US';
             window.speechSynthesis.speak(utterance);
@@ -55,4 +96,3 @@
     </script>
 </body>
 </html>
-
