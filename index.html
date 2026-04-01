@@ -3,272 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة البصيرة اللغوية | Hans Wehr Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <title>المعجم الرقمي | Digital Lexicon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Sans+Arabic:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0f172a; /* كحلي ملكي */
-            --accent: #b59410;  /* ذهبي هانس فير */
-            --bg: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.95);
+            --primary: #2563eb;
+            --text-main: #1f2937;
+            --text-sub: #6b7280;
+            --bg: #ffffff;
+            --border: #e5e7eb;
         }
 
         body {
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Noto Sans Arabic', sans-serif;
             background-color: var(--bg);
-            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
-            background-size: 20px 20px;
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
-            color: var(--primary);
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-        }
-
-        /* رأس الصفحة الفخم */
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            background: var(--primary);
-            color: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            border-bottom: 6px solid var(--accent);
-        }
-
-        .header h1 {
-            font-family: 'Amiri', serif;
-            font-size: 42px;
-            margin: 0;
-            letter-spacing: 1px;
-        }
-
-        .header p {
-            font-weight: 300;
-            opacity: 0.9;
-            margin-top: 10px;
-        }
-
-        /* منطقة البحث */
-        .search-section {
-            background: var(--glass);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            margin-bottom: 30px;
             display: flex;
-            gap: 15px;
+            justify-content: center;
             align-items: center;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        header p {
+            color: var(--text-sub);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            gap: 12px;
         }
 
         input {
             flex: 1;
-            padding: 18px 25px;
-            border: 2px solid #e2e8f0;
-            border-radius: 15px;
-            font-size: 18px;
-            font-family: inherit;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
             outline: none;
-            transition: 0.3s;
+            transition: 0.2s;
         }
 
         input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(181, 148, 16, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
-        .btn-search {
-            background: var(--accent);
+        button {
+            background-color: var(--primary);
             color: white;
-            padding: 18px 40px;
             border: none;
-            border-radius: 15px;
+            padding: 0 24px;
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: 800;
-            transition: 0.3s;
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.2s;
         }
 
-        .btn-search:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(181, 148, 16, 0.3);
+        button:hover {
+            background-color: #1d4ed8;
         }
 
-        /* بطاقات النتائج */
-        .result-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            display: none; /* يظهر عند البحث */
+        .results {
+            margin-top: 30px;
+            display: none;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
         }
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid #e2e8f0;
-            transition: 0.3s;
+        .dictionary-card {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
         }
 
-        .card:hover { transform: translateY(-5px); }
-
-        .card-title {
-            color: var(--accent);
-            font-weight: 800;
-            font-size: 20px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .dictionary-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: block;
         }
 
-        /* قسم "المراجع العميقة" (703 & 823) */
-        .reference-panel {
-            grid-column: span 2;
-            background: #fff;
-            border-right: 8px solid var(--accent);
-            padding: 25px;
-            border-radius: 20px;
-        }
-
-        .ref-btns {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .ref-link {
-            flex: 1;
-            text-align: center;
-            padding: 12px;
-            background: #f1f5f9;
+        .open-btn {
+            display: inline-block;
+            margin-top: 12px;
             color: var(--primary);
             text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
             font-size: 14px;
-            border: 1px solid #cbd5e1;
+            font-weight: 600;
         }
 
-        .ref-link:hover { background: var(--primary); color: white; }
+        .notes-section {
+            margin-top: 20px;
+        }
 
-        /* منطقة تدوين البصيرة الشخصية */
-        .insight-area {
-            grid-column: span 2;
-            background: #1e293b;
-            color: #f8fafc;
-            padding: 30px;
-            border-radius: 20px;
+        label {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+            display: block;
         }
 
         textarea {
             width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
             padding: 15px;
-            color: white;
-            font-family: 'Amiri', serif;
-            font-size: 19px;
-            line-height: 1.6;
-            margin-top: 15px;
-            resize: vertical;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            resize: none;
+            font-size: 15px;
+            box-sizing: border-box;
+            background: #fff;
         }
 
-        .footer-tag {
+        footer {
+            margin-top: 40px;
             text-align: center;
-            margin-top: 50px;
-            color: #94a3b8;
             font-size: 12px;
-        }
-
-        @media (max-width: 768px) {
-            .result-grid { grid-template-columns: 1fr; }
-            .search-section { flex-direction: column; }
-            .btn-search { width: 100%; }
+            color: #9ca3af;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>مَنْصَةُ البَصِيرَةِ اللُّغَوِيَّةِ</h1>
-        <p>الأداة الرقمية المتقدمة لطلاب الزمالة ومترجمي Hans Wehr</p>
+<div class="main-container">
+    <header>
+        <h1>المعجم الرقمي</h1>
+        <p>البحث في معجم Hans Wehr والمعاجم المعتمدة</p>
+    </header>
+
+    <div class="search-box">
+        <input type="text" id="query" placeholder="أدخل الكلمة أو الجذر...">
+        <button onclick="search()">بحث</button>
     </div>
 
-    <div class="search-section">
-        <input type="text" id="searchInput" placeholder="أدخل الجذر أو المصطلح (مثلاً: عجز، سيطر، Powerless)...">
-        <button class="btn-search" onclick="doSearch()">تـحـلـيـل</button>
+    <div id="resultsArea" class="results">
+        <div class="dictionary-card">
+            <span class="dictionary-name">Hans Wehr Dictionary</span>
+            <p id="wordTitle" style="font-size: 18px; margin: 5px 0; font-weight: 600;"></p>
+            <a id="hansLink" href="#" target="_blank" class="open-btn">عرض الصفحة الكاملة في القاموس ←</a>
+        </div>
+
+        <div class="notes-section">
+            <label>ملاحظات إضافية حول المصطلح:</label>
+            <textarea id="notes" rows="5" oninput="saveLocal()" placeholder="سجل ملاحظاتك هنا..."></textarea>
+        </div>
     </div>
 
-    <div id="resultGrid" class="result-grid">
-        
-        <div class="card">
-            <div class="card-title">📖 مراجعة المعاجم</div>
-            <p>تحليل المصطلح لغوياً في Hans Wehr بناءً على الجذور العربية المقابلة.</p>
-            <div class="ref-btns">
-                <a id="hansRootLink" href="#" target="_blank" class="ref-link">جذر الكلمة الحالية</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">⚖️ ميزان الدقة</div>
-            <p id="accuracyNote">هل المصطلح يعبر عن "عجز" أم "فقدان سيادة"؟ قارن بين الجذور للوصول للحقيقة.</p>
-        </div>
-
-        <div class="reference-panel">
-            <div class="card-title">🛡️ مراجع الخطوة الأولى المعتمدة</div>
-            <p>روابط مباشرة لصفحات Hans Wehr التي قمت باستخراجها (703 و 823):</p>
-            <div class="ref-btns">
-                <a href="https://ejtaal.net/aa/#hw4=703" target="_blank" class="ref-link">صفحة 703 (جذر عجز)</a>
-                <a href="https://ejtaal.net/aa/#hw4=823" target="_blank" class="ref-link">صفحة 823 (جذر سيطر)</a>
-            </div>
-        </div>
-
-        <div class="insight-area">
-            <div class="card-title" style="color: var(--accent);">✍️ سجل بصيرتك الشخصية</div>
-            <p style="font-size: 14px; opacity: 0.8;">هنا تكتب فهمك العميق الذي لا تجده في القواميس العادية...</p>
-            <textarea id="personalInsight" rows="6" oninput="saveNote()"></textarea>
-            <p id="saveStatus" style="font-size: 11px; color: var(--accent); margin-top: 5px;"></p>
-        </div>
-
-    </div>
-
-    <div class="footer-tag">
-        تم التطوير لدعم المترجمين في فهم روح النص | 2026
-    </div>
+    <footer>
+        أداة ترجمة شخصية | 2026
+    </footer>
 </div>
 
 <script>
-    function doSearch() {
-        const val = document.getElementById('searchInput').value.trim();
-        if(!val) return;
+    function search() {
+        const q = document.getElementById('query').value.trim();
+        if(!q) return;
 
-        document.getElementById('resultGrid').style.display = 'grid';
+        document.getElementById('resultsArea').style.display = 'block';
+        document.getElementById('wordTitle').innerText = q;
         
-        // تحديث رابط هانس فير بناءً على المدخل
-        document.getElementById('hansRootLink').href = `https://ejtaal.net/aa/#hw4=${val}`;
+        // ربط بمحرك المعاجم
+        document.getElementById('hansLink').href = `https://ejtaal.net/aa/#hw4=${q.toLowerCase()}`;
         
-        // استعادة الملاحظة المحفوظة لهذه الكلمة
-        const saved = localStorage.getItem('insight_' + val.toLowerCase());
-        document.getElementById('personalInsight').value = saved || "";
+        // تحميل الملاحظات
+        const saved = localStorage.getItem('lex_note_' + q.toLowerCase());
+        document.getElementById('notes').value = saved || "";
     }
 
-    function saveNote() {
-        const val = document.getElementById('searchInput').value.trim();
-        const note = document.getElementById('personalInsight').value;
-        if(val) {
-            localStorage.setItem('insight_' + val.toLowerCase(), note);
-            document.getElementById('saveStatus').innerText = "تم حفظ بصيرتك تلقائياً لهذه الكلمة ✅";
-            setTimeout(() => { document.getElementById('saveStatus').innerText = ""; }, 2000);
+    function saveLocal() {
+        const q = document.getElementById('query').value.trim().toLowerCase();
+        const note = document.getElementById('notes').value;
+        if(q) {
+            localStorage.setItem('lex_note_' + q, note);
         }
     }
 </script>
 
 </body>
 </html>
+
