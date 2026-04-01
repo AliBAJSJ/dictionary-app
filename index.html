@@ -1845,4 +1845,420 @@
     .overflow-auto { overflow: auto; }
 
     .cursor-pointer { cursor: pointer; }
-    
+    cursor-default { cursor: default; }
+
+    .user-select-none { user-select: none; }
+
+    /* ============================================
+       التخطيط - Layout Grid
+       ============================================ */
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -15px;
+    }
+
+    .col {
+        flex: 1;
+        padding: 0 15px;
+    }
+
+    .col-1 { flex: 0 0 8.333%; max-width: 8.333%; }
+    .col-2 { flex: 0 0 16.666%; max-width: 16.666%; }
+    .col-3 { flex: 0 0 25%; max-width: 25%; }
+    .col-4 { flex: 0 0 33.333%; max-width: 33.333%; }
+    .col-5 { flex: 0 0 41.666%; max-width: 41.666%; }
+    .col-6 { flex: 0 0 50%; max-width: 50%; }
+    .col-7 { flex: 0 0 58.333%; max-width: 58.333%; }
+    .col-8 { flex: 0 0 66.666%; max-width: 66.666%; }
+    .col-9 { flex: 0 0 75%; max-width: 75%; }
+    .col-10 { flex: 0 0 83.333%; max-width: 83.333%; }
+    .col-11 { flex: 0 0 91.666%; max-width: 91.666%; }
+    .col-12 { flex: 0 0 100%; max-width: 100%; }
+
+    /* ============================================
+       التصميم المتجاوب - Responsive Design
+       ============================================ */
+    @media (max-width: 1200px) {
+        :root {
+            --font-size-4xl: 2.2rem;
+            --font-size-5xl: 3rem;
+        }
+        
+        .glass-card {
+            padding: 40px 30px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .col-md-6 { flex: 0 0 50%; max-width: 50%; }
+        .col-md-12 { flex: 0 0 100%; max-width: 100%; }
+        
+        .welcome-text {
+            font-size: 3.5rem;
+        }
+        
+        h1.logo-title {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .glass-card {
+            padding: 30px 20px;
+            border-radius: var(--radius-xl);
+        }
+        
+        .welcome-text {
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+        }
+        
+        h1.logo-title {
+            font-size: 1.75rem;
+        }
+        
+        p.tagline {
+            font-size: 1rem;
+        }
+        
+        input[type="text"] {
+            padding: 16px 20px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            padding: 15px 24px;
+            font-size: 1rem;
+        }
+        
+        .tabs {
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 10px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .modal {
+            padding: 25px;
+            width: 95%;
+        }
+        
+        .footer-links {
+            flex-direction: column;
+            gap: 15px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .welcome-text {
+            font-size: 2rem;
+        }
+        
+        h1.logo-title {
+            font-size: 1.5rem;
+        }
+        
+        .glass-card {
+            padding: 25px 15px;
+        }
+        
+        .result-item {
+            padding: 20px;
+        }
+        
+        .btn {
+            width: 100%;
+        }
+        
+        .toast {
+            min-width: auto;
+            width: calc(100% - 40px);
+        }
+    }
+
+    /* ============================================
+       الوضع الداكن/الفاتح - Dark/Light Mode
+       ============================================ */
+    @media (prefers-color-scheme: light) {
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+        }
+    }
+
+    /* ============================================
+       الطباعة - Print Styles
+       ============================================ */
+    @media print {
+        .animated-bg,
+        .particles,
+        #splash-screen,
+        .search-btn,
+        footer {
+            display: none !important;
+        }
+        
+        .glass-card {
+            background: #fff !important;
+            border: 1px solid #000 !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+        }
+        
+        body {
+            background: #fff !important;
+            color: #000 !important;
+        }
+    }
+
+    /* ============================================
+       إمكانية الوصول - Accessibility
+       ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
+    .focus-visible:focus {
+        outline: 3px solid var(--accent-color);
+        outline-offset: 2px;
+    }
+
+    /* ============================================
+       تأثيرات إضافية - Extra Effects
+       ============================================ */
+    .glow {
+        box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .glow-hover:hover {
+        box-shadow: 0 0 30px var(--accent-glow-strong);
+    }
+
+    .shimmer {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .shimmer::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        animation: shimmerEffect 2s infinite;
+    }
+
+    @keyframes shimmerEffect {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    .ripple {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ripple::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+        background-repeat: no-repeat;
+        background-position: 50%;
+        transform: scale(10, 10);
+        opacity: 0;
+        transition: transform 0.5s, opacity 1s;
+    }
+
+    .ripple:active::after {
+        transform: scale(0, 0);
+        opacity: 0.3;
+        transition: 0s;
+    }
+
+    /* ============================================
+       الأنماط الخاصة بالعناصر - Element Specific
+       ============================================ */
+    a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    a:hover {
+        color: var(--accent-color-light);
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    code {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 3px 8px;
+        border-radius: var(--radius-sm);
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+        color: var(--accent-color);
+    }
+
+    pre {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        border-radius: var(--radius-lg);
+        overflow-x: auto;
+        border: 1px solid var(--glass-border-dark);
+    }
+
+    pre code {
+        background: none;
+        padding: 0;
+        color: inherit;
+    }
+
+    blockquote {
+        border-right: 4px solid var(--accent-color);
+        padding: 15px 25px;
+        margin: 20px 0;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        font-style: italic;
+        color: var(--text-color-secondary);
+    }
+
+    hr {
+        border: none;
+        height: 1px;
+        background: var(--glass-border-dark);
+        margin: 30px 0;
+    }
+
+    /* ============================================
+       الجداول - Tables
+       ============================================ */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: var(--glass-bg);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: right;
+        border-bottom: 1px solid var(--glass-border-dark);
+    }
+
+    th {
+        background: rgba(255, 255, 255, 0.1);
+        font-weight: 700;
+        color: var(--text-color-primary);
+    }
+
+    tr:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* ============================================
+       الأكورديون - Accordion
+       ============================================ */
+    .accordion {
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+    .accordion-header {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        color: var(--text-color-primary);
+        transition: all 0.3s;
+    }
+
+    .accordion-header:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .accordion-icon {
+        transition: transform 0.3s;
+        font-size: 1.2rem;
+    }
+
+    .accordion.active .accordion-icon {
+        transform: rotate(180deg);
+    }
+
+    .accordion-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding: 0 20px;
+        color: var(--text-color-secondary);
+    }
+
+    .accordion.active .accordion-body {
+        max-height: 500px;
+        padding: 20px;
+    }
+
+    /* ============================================
+       نهاية الأنماط - End of Styles
+       ============================================ */
+</style>
