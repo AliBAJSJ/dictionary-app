@@ -1,770 +1,1848 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>الدرر اللغوية | معجم العربية الذكي</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* ---------- GLOBAL ROOT & RESET ---------- */
-        :root {
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.25);
-            --text-color: #ffffff;
-            --accent-color: #ec4899;
-            --hover-glow: rgba(236, 72, 153, 0.4);
-            --shadow-deep: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+<style>
+    /* ============================================
+       المتغيرات الجذرية - CSS Root Variables
+       ============================================ */
+    :root {
+        /* الألوان الأساسية */
+        --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+        --primary-gradient-reverse: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #6366f1 100%);
+        --secondary-gradient: linear-gradient(135deg, #14b8a6 0%, #06b6d4 50%, #3b82f6 100%);
+        --dark-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+        --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+        --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+        --danger-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+        --info-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+        
+        /* تأثيرات الزجاج */
+        --glass-bg: rgba(255, 255, 255, 0.08);
+        --glass-bg-light: rgba(255, 255, 255, 0.12);
+        --glass-bg-dark: rgba(0, 0, 0, 0.2);
+        --glass-border: rgba(255, 255, 255, 0.25);
+        --glass-border-light: rgba(255, 255, 255, 0.4);
+        --glass-border-dark: rgba(255, 255, 255, 0.1);
+        --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        --glass-shadow-hover: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+        
+        /* الألوان النصية */
+        --text-color: #ffffff;
+        --text-color-primary: #ffffff;
+        --text-color-secondary: rgba(255, 255, 255, 0.75);
+        --text-color-tertiary: rgba(255, 255, 255, 0.55);
+        --text-color-muted: rgba(255, 255, 255, 0.35);
+        --text-color-dark: #0f172a;
+        
+        /* ألوان التمييز */
+        --accent-color: #ec4899;
+        --accent-color-light: #f472b6;
+        --accent-color-dark: #db2777;
+        --accent-glow: rgba(236, 72, 153, 0.4);
+        --accent-glow-strong: rgba(236, 72, 153, 0.6);
+        
+        /* ألوان إضافية */
+        --indigo: #6366f1;
+        --purple: #a855f7;
+        --pink: #ec4899;
+        --cyan: #06b6d4;
+        --teal: #14b8a6;
+        --blue: #3b82f6;
+        --green: #10b981;
+        --yellow: #f59e0b;
+        --orange: #f97316;        --red: #ef4444;
+        
+        /* التوهجات والتأثيرات */
+        --hover-glow: rgba(236, 72, 153, 0.4);
+        --glow-indigo: rgba(99, 102, 241, 0.4);
+        --glow-purple: rgba(168, 85, 247, 0.4);
+        --glow-cyan: rgba(6, 182, 212, 0.4);
+        --glow-teal: rgba(20, 184, 166, 0.4);
+        
+        /* الظلال */
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+        --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+        --shadow-glow: 0 0 30px rgba(236, 72, 153, 0.5);
+        --shadow-glow-lg: 0 0 50px rgba(236, 72, 153, 0.6);
+        
+        /* الحدود */
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 20px;
+        --radius-xl: 30px;
+        --radius-2xl: 40px;
+        --radius-full: 9999px;
+        
+        /* التحولات والحركات */
+        --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        
+        /* المسافات */
+        --spacing-xs: 4px;
+        --spacing-sm: 8px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
+        --spacing-2xl: 48px;
+        --spacing-3xl: 64px;
+        
+        /* الخطوط */
+        --font-family-base: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        --font-family-display: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;        --font-size-3xl: 2rem;
+        --font-size-4xl: 2.5rem;
+        --font-size-5xl: 3.5rem;
+        
+        /* z-index levels */
+        --z-dropdown: 1000;
+        --z-sticky: 1020;
+        --z-fixed: 1030;
+        --z-modal-backdrop: 1040;
+        --z-modal: 1050;
+        --z-popover: 1060;
+        --z-tooltip: 1070;
+        --z-toast: 1080;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            transition: var(--transition-smooth);
-            scroll-behavior: smooth;
-        }
+    /* ============================================
+       إعادة التعيين والأساسيات - Reset & Base
+       ============================================ */
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            font-family: 'Cairo', sans-serif;
-            overflow-x: hidden;
-            background: #0f172a;
-        }
+    * {
+        transition: all var(--transition-base);
+        scroll-behavior: smooth;
+    }
 
-        /* animated gradient background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e1b4b);
-            background-size: 400% 400%;
-            animation: gradientBG 18s ease infinite;
-            z-index: -2;
-        }
+    html {
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        font-family: var(--font-family-base);
+        overflow-x: hidden;
+        background: #0f172a;
+        line-height: 1.6;
+    }
 
-        /* floating particles effect */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            background: radial-gradient(circle at 20% 40%, rgba(99,102,241,0.15) 0%, transparent 50%);
-        }
+    /* تخصيص شريط التمرير */
+    ::-webkit-scrollbar {
+        width: 12px;        height: 12px;
+    }
 
-        /* splash screen */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000000dd;
-            backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 1.2s ease, visibility 1.2s;
-        }
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+    }
 
-        .welcome-text {
-            font-size: 4.5rem;
-            font-weight: 900;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            animation: pulseFade 2.8s ease-in-out infinite;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px #6366f1;
-        }
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+        border-radius: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.05);
+    }
 
-        @keyframes pulseFade {
-            0% { opacity: 0; transform: scale(0.85); filter: blur(8px);}
-            50% { opacity: 1; transform: scale(1.05); filter: blur(0);}
-            100% { opacity: 0; transform: scale(1.2); filter: blur(15px);}
-        }
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #a855f7, #ec4899, #f472b6);
+    }
 
-        /* main wrapper */
-        .main-wrapper {
+    ::-webkit-scrollbar-corner {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* تحديد النص */
+    ::selection {
+        background: rgba(236, 72, 153, 0.3);
+        color: #fff;
+        text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+    }
+
+    /* ============================================
+       الخلفية المتحركة - Animated Background
+       ============================================ */
+    .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e1b4b, #4c1d95, #581c87);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        z-index: -1;
+    }
+
+    .animated-bg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;        height: 100%;
+        background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%);
+        animation: floatBlobs 20s ease-in-out infinite;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        25% { background-position: 50% 100%; }
+        50% { background-position: 100% 50%; }
+        75% { background-position: 50% 0%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes floatBlobs {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -50px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+
+    /* تأثيرات الجزيئات */
+    .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        animation: particleFloat 15s infinite;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
+    .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 14s; }
+    .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 16s; }
+    .particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 13s; }
+    .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 15s; }
+    .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 17s; }
+    .particle:nth-child(7) { left: 70%; animation-delay: 2s; animation-duration: 11s; }    .particle:nth-child(8) { left: 80%; animation-delay: 4s; animation-duration: 14s; }
+    .particle:nth-child(9) { left: 90%; animation-delay: 1s; animation-duration: 16s; }
+    .particle:nth-child(10) { left: 15%; animation-delay: 3s; animation-duration: 13s; }
+
+    @keyframes particleFloat {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+
+    /* ============================================
+       شاشة الترحيب - Splash Screen
+       ============================================ */
+    #splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 1.5s ease, visibility 1.5s;
+        overflow: hidden;
+    }
+
+    #splash-screen::before {
+        content: '';
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(from 0deg, transparent, #6366f1, #a855f7, #ec4899, transparent);
+        animation: rotateSplash 4s linear infinite;
+        opacity: 0.3;
+    }
+
+    #splash-screen.hide {        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .welcome-text {
+        font-size: 5rem;
+        font-weight: 900;
+        color: #fff;
+        letter-spacing: 10px;
+        text-transform: uppercase;
+        animation: pulseFade 3s ease-in-out infinite;
+        font-family: var(--font-family-display);
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 10px #fff, 0 0 20px #6366f1, 0 0 40px #a855f7;
+        position: relative;
+        z-index: 1;
+    }
+
+    .welcome-text::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: blur(20px);
+        opacity: 0.5;
+    }
+
+    @keyframes pulseFade {
+        0% { opacity: 0; transform: scale(0.8) translateY(20px); filter: blur(10px); }
+        20% { opacity: 1; transform: scale(1.05) translateY(0); filter: blur(0); }
+        40% { opacity: 1; transform: scale(1.1) translateY(-10px); filter: blur(0); }
+        60% { opacity: 1; transform: scale(1.05) translateY(0); filter: blur(0); }
+        80% { opacity: 0.8; transform: scale(1.15) translateY(10px); filter: blur(5px); }
+        100% { opacity: 0; transform: scale(1.2) translateY(20px); filter: blur(20px); }
+    }
+
+    @keyframes rotateSplash {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    /* ============================================
+       المحتوى الرئيسي - Main Content
+       ============================================ */
+    .main-wrapper {
+        opacity: 0;
+        transform: translateY(30px);
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    .main-wrapper.content-active {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    /* ============================================
+       الكارت الزجاجي المتقدم - Glass Card
+       ============================================ */
+    .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(25px) saturate(180%);
+        -webkit-backdrop-filter: blur(25px) saturate(180%);
+        border: 1px solid var(--glass-border);
+        border-radius: 30px;
+        padding: 50px;
+        width: 100%;
+        max-width: 800px;
+        box-shadow: var(--shadow-2xl);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+    }
+
+    .glass-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(from 0deg, transparent, #6366f1, #a855f7, #ec4899, transparent);
+        animation: rotateGradient 8s linear infinite;
+        opacity: 0.1;
+        pointer-events: none;        z-index: -1;
+    }
+
+    .glass-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 70%);
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    @keyframes rotateGradient {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .glass-card:hover {
+        border-color: var(--glass-border-light);
+        box-shadow: var(--shadow-glow-lg), 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+        transform: translateY(-5px);
+    }
+
+    /* ============================================
+       العناوين - Headings
+       ============================================ */
+    h1.logo-title {
+        font-size: 2.5rem;
+        color: #fff;
+        margin-bottom: 10px;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        font-weight: 800;
+        letter-spacing: 1px;
+        position: relative;
+        display: inline-block;
+    }
+
+    h1.logo-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);        width: 60%;
+        height: 4px;
+        background: var(--primary-gradient);
+        border-radius: 2px;
+        box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: var(--text-color-primary);
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        color: var(--text-color-primary);
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    p.tagline {
+        color: var(--text-color-secondary);
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+        line-height: 1.8;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* ============================================
+       صندوق البحث - Search Container
+       ============================================ */
+    .search-container {
+        position: relative;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+    .search-container::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: var(--primary-gradient);
+        border-radius: 27px;        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s;
+        filter: blur(10px);
+    }
+
+    .search-container:focus-within::before {
+        opacity: 0.5;
+        animation: borderPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes borderPulse {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 0.8; }
+    }
+
+    input[type="text"],
+    input[type="search"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 20px 30px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid var(--glass-border);
+        border-radius: 25px;
+        color: #fff;
+        font-size: 1.2rem;
+        outline: none;
+        box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+        transition: all 0.3s;
+        font-family: inherit;
+    }
+
+    input[type="text"]::placeholder,
+    input[type="search"]::placeholder {
+        color: var(--text-color-tertiary);
+    }
+
+    input[type="text"]:focus,
+    input[type="search"]:focus {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: #a855f7;
+        box-shadow: 0 0 25px rgba(168, 85, 247, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.1);
+        transform: scale(1.02);
+    }
+
+    input[type="text"]:hover,
+    input[type="search"]:hover {
+        border-color: var(--glass-border-light);
+        background: rgba(255, 255, 255, 0.08);    }
+
+    /* أيقونة البحث */
+    .search-icon {
+        position: absolute;
+        right: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-color-tertiary);
+        font-size: 1.5rem;
+        pointer-events: none;
+        transition: all 0.3s;
+    }
+
+    .search-container:focus-within .search-icon {
+        color: var(--accent-color);
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    /* زر البحث */
+    .search-btn {
+        margin-top: 20px;
+        width: 100%;
+        padding: 18px 30px;
+        background: var(--primary-gradient);
+        border: none;
+        border-radius: 25px;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.2rem;
+        cursor: pointer;
+        box-shadow: 0 10px 25px -5px var(--hover-glow);
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        font-family: inherit;
+    }
+
+    .search-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .search-btn:hover::before {        left: 100%;
+    }
+
+    .search-btn:hover {
+        transform: translateY(-3px) scale(1.02);
+        filter: brightness(1.2);
+        box-shadow: 0 15px 40px -5px var(--hover-glow), 0 0 20px rgba(236, 72, 153, 0.4);
+    }
+
+    .search-btn:active {
+        transform: translateY(-1px) scale(0.98);
+    }
+
+    .search-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* ============================================
+       النتائج - Results Section
+       ============================================ */
+    .result-box {
+        display: none;
+        margin-top: 40px;
+        text-align: right;
+        animation: fadeIn 0.8s ease;
+        width: 100%;
+    }
+
+    .result-box.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-item {
+        background: rgba(255, 255, 255, 0.07);
+        padding: 25px;
+        border-radius: 20px;
+        border-right: 5px solid var(--accent-color);
+        margin-bottom: 25px;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+        backdrop-filter: blur(10px);        border: 1px solid var(--glass-border-dark);
+    }
+
+    .result-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), transparent);
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+    }
+
+    .result-item:hover::before {
+        opacity: 1;
+    }
+
+    .result-item:hover {
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 20px 40px -5px rgba(236, 72, 153, 0.5), var(--shadow-glow);
+        border-right-color: var(--accent-color-light);
+        border-color: var(--glass-border-light);
+    }
+
+    .result-item:nth-child(1) { border-right-color: #6366f1; }
+    .result-item:nth-child(2) { border-right-color: #a855f7; }
+    .result-item:nth-child(3) { border-right-color: #ec4899; }
+    .result-item:nth-child(4) { border-right-color: #14b8a6; }
+    .result-item:nth-child(5) { border-right-color: #3b82f6; }
+
+    .result-item-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        gap: 15px;
+    }
+
+    .result-item-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--primary-gradient);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);    }
+
+    .result-item-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-color-primary);
+        margin: 0;
+    }
+
+    .result-item-content {
+        color: var(--text-color-secondary);
+        line-height: 1.8;
+        margin-bottom: 15px;
+    }
+
+    /* رابط القاموس */
+    .dict-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 15px;
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 1px dashed var(--accent-color);
+        transition: all 0.3s;
+        padding: 5px 0;
+    }
+
+    .dict-link::after {
+        content: '→';
+        transition: transform 0.3s;
+    }
+
+    .dict-link:hover {
+        color: #fff;
+        border-bottom-color: #fff;
+        transform: translateX(5px);
+    }
+
+    .dict-link:hover::after {
+        transform: translateX(5px);
+    }
+
+    /* ============================================
+       منطقة الملاحظات - Textarea
+       ============================================ */
+    textarea {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.2);        border: 1px solid var(--glass-border);
+        border-radius: 15px;
+        color: #ddd;
+        padding: 15px;
+        font-family: inherit;
+        margin-top: 10px;
+        resize: vertical;
+        box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+        transition: all 0.3s;
+        min-height: 120px;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    textarea::placeholder {
+        color: var(--text-color-tertiary);
+    }
+
+    textarea:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: #a855f7;
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1);
+        outline: none;
+    }
+
+    textarea:hover {
+        border-color: var(--glass-border-light);
+        background: rgba(0, 0, 0, 0.25);
+    }
+
+    /* ============================================
+       التذييل - Footer
+       ============================================ */
+    footer {
+        margin-top: auto;
+        padding: 30px 20px;
+        color: var(--text-color-muted);
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        text-align: center;
+        width: 100%;
+        border-top: 1px solid var(--glass-border-dark);
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+    }
+
+    footer a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: all 0.3s;        position: relative;
+    }
+
+    footer a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--accent-color);
+        transition: width 0.3s;
+    }
+
+    footer a:hover {
+        color: var(--accent-color-light);
+    }
+
+    footer a:hover::after {
+        width: 100%;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .social-link {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color-secondary);
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 1.2rem;    }
+
+    .social-link:hover {
+        background: var(--primary-gradient);
+        border-color: transparent;
+        color: #fff;
+        transform: translateY(-5px) rotate(360deg);
+        box-shadow: var(--shadow-glow);
+    }
+
+    /* ============================================
+       الأزرار - Buttons
+       ============================================ */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: var(--radius-lg);
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        font-family: inherit;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-primary {
+        background: var(--primary-gradient);
+        color: #fff;
+        box-shadow: 0 5px 15px var(--hover-glow);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px var(--hover-glow), 0 0 20px rgba(236, 72, 153, 0.4);
+    }
+
+    .btn-secondary {
+        background: var(--glass-bg);
+        color: var(--text-color-primary);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {        background: var(--glass-bg-light);
+        border-color: var(--glass-border-light);
+        transform: translateY(-2px);
+    }
+
+    .btn-success {
+        background: var(--success-gradient);
+        color: #fff;
+    }
+
+    .btn-warning {
+        background: var(--warning-gradient);
+        color: #fff;
+    }
+
+    .btn-danger {
+        background: var(--danger-gradient);
+        color: #fff;
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 2px solid var(--accent-color);
+        color: var(--accent-color);
+    }
+
+    .btn-outline:hover {
+        background: var(--accent-color);
+        color: #fff;
+        box-shadow: var(--shadow-glow);
+    }
+
+    .btn-lg {
+        padding: 16px 32px;
+        font-size: 1.1rem;
+    }
+
+    .btn-sm {
+        padding: 8px 16px;
+        font-size: 0.875rem;
+    }
+
+    /* ============================================
+       البطاقات - Cards
+       ============================================ */
+    .card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-xl);        padding: 30px;
+        box-shadow: var(--shadow-lg);
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-xl), var(--shadow-glow);
+        border-color: var(--glass-border-light);
+    }
+
+    .card-header {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--glass-border-dark);
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-color-primary);
+        margin: 0;
+    }
+
+    .card-body {
+        color: var(--text-color-secondary);
+        line-height: 1.8;
+    }
+
+    .card-footer {
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid var(--glass-border-dark);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* ============================================
+       التحميل - Loading States
+       ============================================ */
+    .loader {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-top-color: var(--accent-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .loader-dots {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .loader-dots span {
+        width: 12px;
+        height: 12px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        animation: bounce 1.4s ease-in-out infinite both;
+    }
+
+    .loader-dots span:nth-child(1) { animation-delay: -0.32s; }
+    .loader-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes bounce {
+        0%, 80%, 100% { transform: scale(0); }
+        40% { transform: scale(1); }
+    }
+
+    .skeleton {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 75%);
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s ease-in-out infinite;
+        border-radius: var(--radius-md);
+    }
+
+    @keyframes skeleton-loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+    /* ============================================
+       الشارات - Badges
+       ============================================ */
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 12px;
+        border-radius: var(--radius-full);
+        font-size: 0.75rem;
+        font-weight: 600;        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .badge-primary {
+        background: rgba(99, 102, 241, 0.2);
+        color: #6366f1;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .badge-success {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-warning {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .badge-danger {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* ============================================
+       النماذج - Forms
+       ============================================ */
+    .form-group {
+        margin-bottom: 25px;
+        text-align: right;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--text-color-secondary);
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .form-label.required::after {
+        content: ' *';
+        color: var(--red);
+    }
+
+    .form-input {        width: 100%;
+        padding: 14px 18px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid var(--glass-border);
+        border-radius: var(--radius-lg);
+        color: var(--text-color-primary);
+        font-size: 1rem;
+        transition: all 0.3s;
+        font-family: inherit;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.1);
+    }
+
+    .form-input:hover {
+        border-color: var(--glass-border-light);
+    }
+
+    .form-input::placeholder {
+        color: var(--text-color-tertiary);
+    }
+
+    .form-error {
+        color: var(--red);
+        font-size: 0.875rem;
+        margin-top: 6px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .form-success {
+        color: var(--green);
+        font-size: 0.875rem;
+        margin-top: 6px;
+    }
+
+    /* ============================================
+       القوائم - Lists
+       ============================================ */
+    .list-unstyled {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .list-item {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--glass-border-dark);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.3s;
+    }
+
+    .list-item:hover {
+        background: rgba(255, 255, 255, 0.03);
+        padding-right: 10px;
+        border-radius: var(--radius-md);
+    }
+
+    .list-item:last-child {
+        border-bottom: none;
+    }
+
+    .list-item-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-gradient);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        flex-shrink: 0;
+    }
+
+    .list-item-content {
+        flex: 1;
+    }
+
+    .list-item-title {
+        font-weight: 600;
+        color: var(--text-color-primary);
+        margin-bottom: 3px;
+    }
+
+    .list-item-desc {
+        font-size: 0.875rem;
+        color: var(--text-color-tertiary);
+    }
+
+    /* ============================================
+       التبويبات - Tabs
+       ============================================ */
+    .tabs {        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid var(--glass-border-dark);
+        padding-bottom: 10px;
+    }
+
+    .tab {
+        padding: 12px 24px;
+        background: transparent;
+        border: none;
+        color: var(--text-color-tertiary);
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: var(--radius-md) var(--radius-md) 0 0;
+        transition: all 0.3s;
+        position: relative;
+        font-family: inherit;
+        font-size: 1rem;
+    }
+
+    .tab::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-gradient);
+        transition: width 0.3s;
+    }
+
+    .tab:hover {
+        color: var(--text-color-secondary);
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab.active {
+        color: var(--accent-color);
+        background: rgba(236, 72, 153, 0.1);
+    }
+
+    .tab.active::after {
+        width: 100%;
+    }
+
+    .tab-content {
+        display: none;
+        animation: fadeIn 0.4s ease;
+    }
+    .tab-content.active {
+        display: block;
+    }
+
+    /* ============================================
+       التنبيهات - Alerts
+       ============================================ */
+    .alert {
+        padding: 16px 20px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        border: 1px solid;
+        backdrop-filter: blur(10px);
+        animation: slideIn 0.4s ease;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .alert-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .alert-content {
+        flex: 1;
+    }
+
+    .alert-title {
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .alert-desc {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+    .alert-success {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+        color: #10b981;
+    }
+
+    .alert-warning {
+        background: rgba(245, 158, 11, 0.1);
+        border-color: rgba(245, 158, 11, 0.3);
+        color: #f59e0b;
+    }
+
+    .alert-danger {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.3);
+        color: #ef4444;
+    }
+
+    .alert-info {
+        background: rgba(59, 130, 246, 0.1);
+        border-color: rgba(59, 130, 246, 0.3);
+        color: #3b82f6;
+    }
+
+    /* ============================================
+       النوافذ المنبثقة - Modals
+       ============================================ */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: var(--z-modal);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+    }
+
+    .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal {        background: var(--glass-bg);
+        backdrop-filter: blur(30px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-2xl);
+        padding: 40px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        transform: scale(0.9) translateY(20px);
+        transition: all 0.3s;
+        box-shadow: var(--shadow-2xl);
+    }
+
+    .modal-overlay.active .modal {
+        transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--glass-border-dark);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-color-primary);
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        color: var(--text-color-tertiary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+
+    .modal-close:hover {
+        background: rgba(255, 255, 255, 0.1);        color: var(--text-color-primary);
+        transform: rotate(90deg);
+    }
+
+    .modal-body {
+        color: var(--text-color-secondary);
+        line-height: 1.8;
+        margin-bottom: 25px;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        padding-top: 20px;
+        border-top: 1px solid var(--glass-border-dark);
+    }
+
+    /* ============================================
+       التلميحات - Tooltips
+       ============================================ */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+        background: rgba(0, 0, 0, 0.9);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+        pointer-events: none;
+        z-index: var(--z-tooltip);
+    }
+
+    .tooltip::before {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 50%;        transform: translateX(-50%) translateY(-5px);
+        border: 8px solid transparent;
+        border-top-color: rgba(0, 0, 0, 0.9);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+    }
+
+    .tooltip:hover::after,
+    .tooltip:hover::before {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* ============================================
+       القوائم المنسدلة - Dropdowns
+       ============================================ */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        min-width: 200px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xl);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s;
+        z-index: var(--z-dropdown);
+        margin-top: 10px;
+    }
+
+    .dropdown.active .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-item {
+        padding: 12px 20px;
+        color: var(--text-color-secondary);        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s;
+        cursor: pointer;
+    }
+
+    .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-color-primary);
+        padding-right: 25px;
+    }
+
+    .dropdown-divider {
+        height: 1px;
+        background: var(--glass-border-dark);
+        margin: 8px 0;
+    }
+
+    /* ============================================
+       شريط التقدم - Progress Bars
+       ============================================ */
+    .progress {
+        height: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-full);
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: var(--primary-gradient);
+        border-radius: var(--radius-full);
+        transition: width 0.6s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* ============================================
+       التوستر - Toast Notifications
+       ============================================ */
+    .toast-container {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: var(--z-toast);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .toast {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-lg);
+        padding: 16px 20px;
+        min-width: 300px;
+        box-shadow: var(--shadow-xl);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        animation: toastSlideIn 0.4s ease;
+        overflow: hidden;
+        position: relative;
+    }
+
+    @keyframes toastSlideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .toast.hiding {
+        animation: toastSlideOut 0.4s ease forwards;
+    }
+    @keyframes toastSlideOut {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+    }
+
+    .toast::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: var(--primary-gradient);
+        animation: toastProgress 3s linear forwards;
+    }
+
+    @keyframes toastProgress {
+        from { width: 100%; }
+        to { width: 0%; }
+    }
+
+    .toast-icon {
+        font-size: 1.5rem;
+    }
+
+    .toast-content {
+        flex: 1;
+    }
+
+    .toast-title {
+        font-weight: 700;
+        color: var(--text-color-primary);
+        margin-bottom: 3px;
+    }
+
+    .toast-message {
+        font-size: 0.875rem;
+        color: var(--text-color-secondary);
+    }
+
+    .toast-close {
+        background: none;
+        border: none;
+        color: var(--text-color-tertiary);
+        cursor: pointer;        font-size: 1.2rem;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+
+    .toast-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-color-primary);
+    }
+
+    /* ============================================
+       التدرجات الإضافية - Additional Gradients
+       ============================================ */
+    .gradient-text {
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .gradient-bg {
+        background: var(--primary-gradient);
+    }
+
+    .gradient-border {
+        position: relative;
+    }
+
+    .gradient-border::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: var(--primary-gradient);
+        border-radius: inherit;
+        z-index: -1;
+        filter: blur(10px);
+        opacity: 0.5;
+    }
+
+    /* ============================================
+       التأثيرات الحركية - Animations
+       ============================================ */
+    .animate-fade-in {
+        animation: fadeIn 0.6s ease;    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .animate-fade-in-down {
+        animation: fadeInDown 0.6s ease;
+    }
+
+    .animate-slide-in-left {
+        animation: slideInLeft 0.6s ease;
+    }
+
+    .animate-slide-in-right {
+        animation: slideInRight 0.6s ease;
+    }
+
+    .animate-scale-in {
+        animation: scaleIn 0.4s ease;
+    }
+
+    .animate-bounce-in {
+        animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @keyframes fadeInUp {
+        from {
             opacity: 0;
             transform: translateY(30px);
-            padding: 30px 20px 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            transition: all 1s ease;
         }
-        .content-active {
+        to {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* advanced glass card */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid var(--glass-border);
-            border-radius: 45px;
-            padding: 40px 35px;
-            width: 100%;
-            max-width: 1100px;
-            box-shadow: var(--shadow-deep);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, #6366f1, #a855f7, #ec4899, #6366f1);
-            animation: rotateGradient 12s linear infinite;
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        @keyframes rotateGradient {
-            0% { transform: rotate(0deg);}
-            100% { transform: rotate(360deg);}
-        }
-
-        h1.logo-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            letter-spacing: -0.5px;
-        }
-
-        .tagline {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 35px;
-            font-size: 1.1rem;
-        }
-
-        /* stats row */
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            background: rgba(0,0,0,0.3);
-            border-radius: 80px;
-            padding: 10px 25px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 600;
-            color: #fff;
-            background: rgba(255,255,255,0.05);
-            padding: 6px 18px;
-            border-radius: 40px;
-            backdrop-filter: blur(4px);
-        }
-        .stat-item i { font-size: 1.3rem; color: var(--accent-color);}
-
-        /* search group */
-        .search-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-        .search-input-wrapper {
-            flex: 4;
-            position: relative;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 18px 25px;
-            background: rgba(255,255,255,0.07);
-            border: 2px solid var(--glass-border);
-            border-radius: 60px;
-            color: #fff;
-            font-size: 1.1rem;
-            outline: none;
-            font-family: 'Cairo', sans-serif;
-        }
-        input:focus {
-            background: rgba(255,255,255,0.13);
-            border-color: #a855f7;
-            box-shadow: 0 0 20px rgba(168,85,247,0.5);
-        }
-        .btn-glow {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 60px;
-            padding: 0 32px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: white;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.2s;
-        }
-        .btn-glow:hover {
-            transform: scale(1.03);
-            filter: brightness(1.1);
-            box-shadow: 0 8px 25px var(--hover-glow);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 1.5px solid var(--accent-color);
-            border-radius: 60px;
-            padding: 0 28px;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        /* tabs */
-        .tabs-container {
-            display: flex;
-            gap: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            margin: 30px 0 20px;
-            flex-wrap: wrap;
-        }
-        .tab-btn {
-            background: none;
-            border: none;
-            padding: 12px 28px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #ccc;
-            cursor: pointer;
-            border-radius: 40px;
-            transition: 0.2s;
-        }
-        .tab-btn.active {
-            background: var(--primary-gradient);
-            color: white;
-            box-shadow: 0 5px 15px rgba(236,72,153,0.4);
-        }
-        .tab-pane {
-            display: none;
-            animation: fadeSlide 0.4s ease;
-        }
-        .tab-pane.active-pane {
-            display: block;
-        }
-        @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(8px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-
-        /* result card style */
-        .result-item {
-            background: rgba(255,255,255,0.07);
-            padding: 28px;
-            border-radius: 35px;
-            border-right: 6px solid var(--accent-color);
-            margin-bottom: 30px;
-            box-shadow: 0 12px 28px -12px rgba(0,0,0,0.5);
-        }
-        .word-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        .word-title {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg,#fff, #f0a6ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-        }
-        .icon-btn {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            border-radius: 50px;
-            width: 42px;
-            height: 42px;
-            font-size: 1.2rem;
-            color: white;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .icon-btn:hover {
-            background: var(--accent-color);
-            transform: scale(1.07);
-        }
-        .def-text {
-            font-size: 1.1rem;
-            line-height: 1.65;
-            color: #f0f0f0;
-            margin: 15px 0;
-        }
-        .example-box {
-            background: rgba(0,0,0,0.35);
-            padding: 14px 20px;
-            border-radius: 24px;
-            border-right: 3px solid #a855f7;
-            margin: 20px 0;
-            font-style: italic;
-        }
-        .syn-ant {
-            display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-            font-size: 0.95rem;
-        }
-        .dict-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 1px dashed;
-        }
-        textarea {
-            width: 100%;
-            background: rgba(0,0,0,0.3);
-            border-radius: 25px;
-            color: #ddd;
-            padding: 16px;
-            font-family: inherit;
-            margin-top: 15px;
-            border: 1px solid var(--glass-border);
-            resize: vertical;
-        }
-        .favorite-word-item, .note-item {
-            background: rgba(255,255,255,0.06);
-            border-radius: 30px;
-            padding: 18px;
-            margin-bottom: 15px;
-            transition: 0.2s;
-        }
-        .word-of-day {
-            background: linear-gradient(120deg, #6366f130, #a855f730);
-            border-radius: 35px;
-            padding: 18px 25px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.8rem;
-        }
-        @media (max-width: 700px) {
-            .glass-card { padding: 25px 18px;}
-            .btn-glow { padding: 12px 20px;}
-            .word-title { font-size: 1.5rem;}
-        }
-    </style>
-</head>
-<body>
-<div class="animated-bg"></div>
-<div class="particles"></div>
-
-<div id="splash-screen">
-    <div class="welcome-text">الدرر اللغوية</div>
-</div>
-
-<div class="main-wrapper" id="mainApp">
-    <div class="glass-card">
-        <div style="text-align: center;">
-            <h1 class="logo-title"><i class="fas fa-book-open"></i> المعجم الذكي</h1>
-            <p class="tagline"><i class="fas fa-language"></i> أوسع معجم عربي بتقنيات حديثة | ابحث واستفد واحفظ مفضلاتك</p>
-        </div>
-
-        <!-- stats area -->
-        <div class="stats-row" id="statsRow">
-            <div class="stat-item"><i class="fas fa-database"></i> <span id="totalWordsCount">0</span> كلمة</div>
-            <div class="stat-item"><i class="fas fa-heart" style="color:#ec4899"></i> <span id="favCount">0</span> مفضلة</div>
-            <div class="stat-item"><i class="fas fa-sticky-note"></i> <span id="notesCount">0</span> ملاحظة</div>
-            <div class="stat-item"><i class="fas fa-chart-line"></i> آخر بحث: <span id="lastSearch">—</span></div>
-        </div>
-
-        <!-- search area -->
-        <div class="search-group">
-            <div class="search-input-wrapper">
-                <input type="text" id="searchInput" placeholder="اكتب كلمة عربية أو معناها... مثل: نور، جمال، حكمة" autocomplete="off">
-            </div>
-            <button class="btn-glow" id="searchBtn"><i class="fas fa-search"></i> بحث</button>
-            <button class="btn-glow btn-outline" id="randomWordBtn"><i class="fas fa-dice"></i> عشوائي</button>
-        </div>
-
-        <!-- TABS navigation -->
-        <div class="tabs-container">
-            <button class="tab-btn active" data-tab="dictionaryTab"><i class="fas fa-gem"></i> المعجم</button>
-            <button class="tab-btn" data-tab="favoritesTab"><i class="fas fa-heart"></i> المفضلات</button>
-            <button class="tab-btn" data-tab="notesTab"><i class="fas fa-pen-alt"></i> ملاحظاتي</button>
-            <button class="tab-btn" data-tab="dailyTab"><i class="fas fa-calendar-day"></i> كلمة اليوم</button>
-        </div>
-
-        <!-- Dictionary Pane -->
-        <div id="dictionaryTab" class="tab-pane active-pane">
-            <div id="searchResultArea" style="min-height: 280px;">
-                <div style="text-align: center; color:#aaa; padding: 40px;"><i class="fas fa-lightbulb"></i> ابحث عن أي كلمة لترى شرحاً وافياً، أمثلة، مترادفات...</div>
-            </div>
-            <div id="noteSection" style="display: none;">
-                <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
-                <label style="font-weight: 600;"><i class="fas fa-pencil-alt"></i> ملاحظاتي حول هذه الكلمة:</label>
-                <textarea id="wordNote" rows="3" placeholder="أضف ملاحظاتك الخاصة هنا... سيتم حفظها تلقائياً"></textarea>
-                <div style="font-size: 12px; margin-top: 5px; color:#aaa;" id="noteSavedStatus"></div>
-            </div>
-        </div>
-
-        <!-- Favorites Pane -->
-        <div id="favoritesTab" class="tab-pane">
-            <div id="favoritesListContainer"><div style="padding: 30px; text-align:center;">✨ لا توجد كلمات في المفضلة بعد، أضف من المعجم</div></div>
-        </div>
-
-        <!-- Notes Pane -->
-        <div id="notesTab" class="tab-pane">
-            <div id="allNotesContainer"><div style="padding: 30px; text-align:center;">📝 ستظهر هنا ملاحظاتك المرتبطة بالكلمات</div></div>
-        </div>
-
-        <!-- Daily Word Pane -->
-        <div id="dailyTab" class="tab-pane">
-            <div id="dailyWordContainer" class="word-of-day"></div>
-            <div style="margin-top: 25px;"><i class="fas fa-sync-alt"></i> تتجدد يومياً مع حكمة وعلم</div>
-        </div>
-
-        <footer>
-            <i class="fas fa-microphone-alt"></i> نطق صوتي | <i class="fas fa-share-alt"></i> مشاركة | معجم شامل بأكثر من 45 مدخلاً غنياً
-        </footer>
-    </div>
-</div>
-
-<script>
-    // ----------------------- DICTIONARY DATABASE (Rich & Extensive) -------------------------
-    const dictionaryDB = [
-        { id: "nur", word: "نور", definition: "الضياء، ما يُكشف به الظلام، مصدر الإبصار والهداية.", example: "نور الشمس ساطع في الصباح.", synonyms: ["ضياء", "إشراق"], antonyms: ["ظلمة"], pos: "اسم", pronunciation: "noor", category: "طبيعة" },
-        { id: "hikma", word: "حكمة", definition: "إتقان العلم والعمل، وضع الأمور في مواضعها.", example: "الحكمة ضالة المؤمن.", synonyms: ["فطنة", "رزانة"], antonyms: ["جهل", "سفه"], pos: "اسم", pronunciation: "hikma", category: "فلسفة" },
-        { id: "sabr", word: "صبر", definition: "حبس النفس عن الجزع، التحمل والثبات.", example: "الصبر مفتاح الفرج.", synonyms: ["جلد", "ثبات"], antonyms: ["جزع"], pos: "اسم", pronunciation: "sabr", category: "أخلاق" },
-        { id: "rahma", word: "رحمة", definition: "الرقة والعطف، الإنعام والإحسان.", example: "الرحمة صفة من صفات الله.", synonyms: ["عطف", "حنو"], antonyms: ["قسوة"], pos: "اسم", pronunciation: "rahma", category: "روحانيات" },
-        { id: "ilm", word: "علم", definition: "إدراك الشيء على حقيقته، المعرفة والدراسة.", example: "العلم نور والجهل ظلام.", synonyms: ["معرفة", "دراية"], antonyms: ["جهل"], pos: "اسم", pronunciation: "ilm", category: "تعليم" },
-        { id: "amal", word: "أمل", definition: "توقع الخير ورجاؤه، التفاؤل بالمستقبل.", example: "الأمل يضيء الطريق.", synonyms: ["رجاء", "تفاؤل"], antonyms: ["يأس"], pos: "اسم", pronunciation: "amal", category: "مشاعر" },
-        { id: "salam", word: "سلام", definition: "الأمان والطمأنينة، التحية الخالية من الشر.", example: "السلام من أجمل الكلمات.", synonyms: ["أمان", "وئام"], antonyms: ["حرب"], pos: "اسم", pronunciation: "salam", category: "اجتماع" },
-        { id: "karam", word: "كرم", definition: "الجود والعطاء، الشرف والرفعة.", example: "الكرم من شيم الكرام.", synonyms: ["جود", "سماحة"], antonyms: ["بخل"], pos: "اسم", pronunciation: "karam", category: "أخلاق" },
-        { id: "shaja'a", word: "شجاعة", definition: "الإقدام وقوة القلب في مواجهة المخاطر.", example: "الشجاعة فضيلة عظيمة.", synonyms: ["بسالة", "جرأة"], antonyms: ["جبن"], pos: "اسم", pronunciation: "shajaa", category: "أخلاق" },
-        { id: "wafa", word: "وفاء", definition: "الالتزام بالعهد والإخلاص.", example: "الوفاء من صفات المؤمنين.", synonyms: ["إخلاص", "صدق"], antonyms: ["غدر"], pos: "اسم", pronunciation: "wafa", category: "أخلاق" },
-        { id: "fajr", word: "فجر", definition: "بداية النهار، وقت السحر المبارك.", example: "صلاة الفجر نور.", synonyms: ["صباح"], antonyms: ["غسق"], pos: "اسم", pronunciation: "fajr", category: "زمن" },
-        { id: "hubb", word: "حب", definition: "ميل القلب وإخلاص المشاعر.", example: "الحب أساس الحياة.", synonyms: ["ود", "عشق"], antonyms: ["بغض"], pos: "اسم", pronunciation: "hubb", category: "مشاعر" },
-        { id: "tawakkul", word: "توكل", definition: "الاعتماد على الله مع الأخذ بالأسباب.", example: "التوكل من أعظم العبادات.", synonyms: ["اعتماد", "ثقة"], antonyms: ["عجز"], pos: "اسم", pronunciation: "tawakkul", category: "روحانيات" },
-        { id: "farah", word: "فرح", definition: "السرور والبهجة.", example: "الفرح يغمر القلب.", synonyms: ["سرور", "ابتهاج"], antonyms: ["حزن"], pos: "اسم", pronunciation: "farah", category: "مشاعر" },
-        { id: "ikhlass", word: "إخلاص", definition: "نقاء النية والصدق في العمل.", example: "الإخلاص شرط قبول الأعمال.", synonyms: ["صدق", "صفاء"], antonyms: ["رياء"], pos: "اسم", pronunciation: "ikhlas", category: "روحانيات" },
-        { id: "samah", word: "سماح", definition: "التسامح والعفو.", example: "السماح يجلب المحبة.", synonyms: ["تسامح", "عفو"], antonyms: ["تعنت"], pos: "اسم", pronunciation: "samah", category: "أخلاق" },
-        { id: "qalam", word: "قلم", definition: "أداة الكتابة، رمز العلم والمعرفة.", example: "القلم أداة الحضارة.", synonyms: ["يراع"], antonyms: [], pos: "اسم", pronunciation: "qalam", category: "أدوات" },
-        { id: "kitab", word: "كتاب", definition: "ما يُكتب فيه العلم أو الأدب.", example: "الكتاب خير جليس.", synonyms: ["مؤلف", "سفر"], antonyms: [], pos: "اسم", pronunciation: "kitab", category: "ثقافة" },
-        { id: "samaa", word: "سماء", definition: "السماء سقف الأرض المحفوظ.", example: "السماء زرقاء صافية.", synonyms: ["رفارف"], antonyms: ["أرض"], pos: "اسم", pronunciation: "samaa", category: "طبيعة" },
-        { id: "ard", word: "أرض", definition: "الكوكب الذي نعيش عليه، اليابسة.", example: "الأرض أمنا.", synonyms: ["يابسة"], antonyms: ["سماء"], pos: "اسم", pronunciation: "ard", category: "طبيعة" },
-        { id: "bahr", word: "بحر", definition: "المسطح المائي الكبير.", example: "البحر ملهم الشعراء.", synonyms: ["يم", "لجة"], antonyms: [], pos: "اسم", pronunciation: "bahr", category: "طبيعة" },
-        { id: "shams", word: "شمس", definition: "النجم المركزي للمجموعة الشمسية.", example: "الشمس مصدر الطاقة.", synonyms: ["ضياء"], antonyms: ["قمر"], pos: "اسم", pronunciation: "shams", category: "طبيعة" },
-        { id: "qamar", word: "قمر", definition: "جسم مضيء في الليل.", example: "القمر منير الظلمة.", synonyms: ["بدر"], antonyms: [], pos: "اسم", pronunciation: "qamar", category: "طبيعة" }
-    ];
-
-    // additional entries for richness (total > 40)
-    const extraEntries = [
-        { id: "tahajjud", word: "تهجد", definition: "قيام الليل وصلاة التطوع.", example: "التهجد سبب للسعادة.", synonyms: ["قيام"], antonyms: [], pos: "اسم", pronunciation: "tahajjud", category: "عبادات" },
-        { id: "barakah", word: "بركة", definition: "الزيادة والنماء والخير.", example: "البركة في البساطة.", synonyms: ["نماء"], antonyms: ["نقص"], pos: "اسم", pronunciation: "barakah", category: "روحانيات" },
-        { id: "najah", word: "نجاح", definition: "بلوغ الأهداف والتفوق.", example: "النجاح ثمرة الاجتهاد.", synonyms: ["فلاح", "تفوق"], antonyms: ["فشل"], pos: "اسم", pronunciation: "najah", category: "حياة" },
-        { id: "ikhfa", word: "إخفاء", definition: "ستر الشيء وإبعاده عن الأنظار.", example: "الإخفاء أحياناً حكمة.", synonyms: ["تستر"], antonyms: ["إظهار"], pos: "اسم", pronunciation: "ikhfa", category: "سلوك" },
-        { id: "sakhra", word: "صخرة", definition: "حجر كبير صلب.", example: "صخرة الجبل شامخة.", synonyms: ["حجر"], antonyms: [], pos: "اسم", pronunciation: "sakhra", category: "طبيعة" }
-    ];
-    dictionaryDB.push(...extraEntries);
-    // total words count = 28? Actually now ~28 + extra => 28, but we have many more: i'll make sure >45 words by adding loop?
-    const extraWords2 = [
-        { id: "hadiqa", word: "حديقة", definition: "أرض ذات أشجار وأزهار.", example: "الحديقة مكان جميل.", synonyms: ["روضة"], antonyms: [], pos: "اسم", pronunciation: "hadiqa", category: "طبيعة" },
-        { id: "madrasa", word: "مدرسة", definition: "مؤسسة تعليمية.", example: "المدرسة بيت العلم الثاني.", synonyms: ["معهد"], antonyms: [], pos: "اسم", pronunciation: "madrasa", category: "تعليم" },
-        { id: "ustadh", word: "أستاذ", definition: "المعلم أو العالم الجليل.", example: "الأستاذ قدوة.", synonyms: ["معلم"], antonyms: [], pos: "اسم", pronunciation: "ustadh", category: "تعليم" }
-    ];
-    dictionaryDB.push(...extraWords2);
-    // finally > 45 entries
-    // update stats
-    const totalWords = dictionaryDB.length;
-    document.getElementById("totalWordsCount").innerText = totalWords;
-
-    // ---------- GLOBALS ----------
-    let favorites = JSON.parse(localStorage.getItem("lexiFavs")) || [];
-    let notesMap = JSON.parse(localStorage.getItem("lexiNotes")) || {};
-    let currentDisplayedWord = null;  // current word object
-
-    function updateStatsUI() {
-        document.getElementById("favCount").innerText = favorites.length;
-        const notesLen = Object.keys(notesMap).length;
-        document.getElementById("notesCount").innerText = notesLen;
     }
 
-    function saveFavs() { localStorage.setItem("lexiFavs", JSON.stringify(favorites)); updateStatsUI(); renderFavoritesTab(); }
-    function saveNotes() { localStorage.setItem("lexiNotes", JSON.stringify(notesMap)); updateStatsUI(); renderAllNotesTab(); }
-
-    // helper: find word by id or by word string
-    function findWord(query) {
-        query = query.trim().toLowerCase();
-        return dictionaryDB.find(w => w.word.toLowerCase() === query || w.id === query || (w.definition && w.definition.toLowerCase().includes(query)));
-    }
-
-    // render detailed result
-    function renderResult(wordObj) {
-        if (!wordObj) {
-            document.getElementById("searchResultArea").innerHTML = `<div style="background:rgba(255,80,80,0.2); border-radius:30px; padding:25px; text-align:center;"><i class="fas fa-exclamation-triangle"></i> لم نعثر على الكلمة، حاول بصيغة أخرى.</div>`;
-            document.getElementById("noteSection").style.display = "none";
-            currentDisplayedWord = null;
-            return;
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
         }
-        currentDisplayedWord = wordObj;
-        const isFav = favorites.includes(wordObj.id);
-        const starIcon = isFav ? '<i class="fas fa-heart" style="color:#ec4899"></i>' : '<i class="far fa-heart"></i>';
-        const synHtml = wordObj.synonyms?.length ? `<strong>مرادفات:</strong> ${wordObj.synonyms.join("، ")}` : '';
-        const antHtml = wordObj.antonyms?.length ? `<strong>أضداد:</strong> ${wordObj.antonyms.join("، ")}` : '';
-        const html = `
-            <div class="result-item">
-                <div class="word-header">
-                    <div class="word-title">${wordObj.word}</div>
-                    <div class="action-buttons">
-                        <button class="icon-btn" id="favWordBtn" title="مفضلة">${starIcon}</button>
-                        <button class="icon-btn" id="speakWordBtn" title="استماع"><i class="fas fa-volume-up"></i></button>
-                        <button class="icon-btn" id="shareWordBtn" title="مشاركة"><i class="fas fa-share-alt"></i></button>
-                    </div>
-                </div>
-                <div class="def-text"><i class="fas fa-book"></i> <strong>المعنى:</strong> ${wordObj.definition}</div>
-                ${wordObj.example ? `<div class="example-box"><i class="fas fa-quote-right"></i> مثال: ${wordObj.example}</div>` : ''}
-                <div class="syn-ant">${synHtml} ${antHtml ? ' | ' + antHtml : ''}</div>
-                <div><i class="fas fa-tag"></i> القسم: ${wordObj.category || 'عام'} | نوع الكلمة: ${wordObj.pos || 'اسم'}</div>
-                <a class="dict-link" href="#" target="_blank" id="externalLink"><i class="fas fa-external-link-alt"></i> المزيد في المعجم الكبير</a>
-            </div>
-        `;
-        document.getElementById("searchResultArea").innerHTML = html;
-        document.getElementById("noteSection").style.display = "block";
-        // load note for this word
-        const savedNote = notesMap[wordObj.id] || "";
-        document.getElementById("wordNote").value = savedNote;
-        document.getElementById("noteSavedStatus").innerHTML = "";
-
-        // bind buttons
-        document.getElementById("favWordBtn").onclick = () => toggleFavorite(wordObj.id);
-        document.getElementById("speakWordBtn").onclick = () => speakText(wordObj.word + " : " + wordObj.definition);
-        document.getElementById("shareWordBtn").onclick = () => shareWord(wordObj);
-        const extLink = document.getElementById("externalLink");
-        extLink.href = `https://www.almaany.com/ar/dict/ar-ar/${encodeURIComponent(wordObj.word)}/`;
-        extLink.target = "_blank";
-        updateLastSearch(wordObj.word);
-    }
-
-    function toggleFavorite(id) {
-        if (favorites.includes(id)) {
-            favorites = favorites.filter(fid => fid !== id);
-        } else {
-            favorites.push(id);
-        }
-        saveFavs();
-        if (currentDisplayedWord && currentDisplayedWord.id === id) renderResult(currentDisplayedWord);
-        else if (currentDisplayedWord) renderResult(currentDisplayedWord);
-        renderFavoritesTab();
-    }
-
-    function speakText(text) {
-        if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'ar-SA';
-            speechSynthesis.cancel();
-            speechSynthesis.speak(utterance);
-        } else alert("المتصفح لا يدعم النطق");
-    }
-    function shareWord(word) {
-        if (navigator.share) {
-            navigator.share({ title: word.word, text: `${word.word}: ${word.definition}`, url: window.location.href });
-        } else {
-            alert(`📖 ${word.word}: ${word.definition}`);
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
-    function updateLastSearch(w) { document.getElementById("lastSearch").innerText = w; }
 
-    // Search Logic
-    function performSearch() {
-        let query = document.getElementById("searchInput").value.trim();
-        if (!query) { alert("أدخل كلمة للبحث"); return; }
-        const found = findWord(query);
-        renderResult(found);
-        if (!found && query) document.getElementById("lastSearch").innerText = query;
-    }
-
-    // random word
-    function randomWord() {
-        const rand = dictionaryDB[Math.floor(Math.random() * dictionaryDB.length)];
-        renderResult(rand);
-        document.getElementById("searchInput").value = rand.word;
-    }
-
-    // Favorites rendering
-    function renderFavoritesTab() {
-        const container = document.getElementById("favoritesListContainer");
-        if (!favorites.length) { container.innerHTML = '<div style="padding:30px; text-align:center;">💖 لا مفضلات بعد، أضف كلماتك المفضلة</div>'; return; }
-        let favWords = favorites.map(id => dictionaryDB.find(w => w.id === id)).filter(w => w);
-        let html = '';
-        favWords.forEach(w => {
-            html += `<div class="favorite-word-item" style="cursor:pointer;" data-id="${w.id}">
-                        <div style="display:flex; justify-content:space-between;"><strong style="font-size:1.4rem;">${w.word}</strong>
-                        <button class="icon-btn remove-fav-btn" data-id="${w.id}" style="background:#c0265a;"><i class="fas fa-trash-alt"></i></button></div>
-                        <div>${w.definition.substring(0, 100)}...</div>
-                    </div>`;
-        });
-        container.innerHTML = html;
-        document.querySelectorAll(".favorite-word-item").forEach(el => {
-            const wid = el.getAttribute("data-id");
-            el.addEventListener("click", (e) => {
-                if(e.target.classList.contains("remove-fav-btn")) return;
-                const wordObj = dictionaryDB.find(w => w.id === wid);
-                if(wordObj) renderResult(wordObj);
-                document.querySelector(".tab-btn[data-tab='dictionaryTab']").click();
-            });
-            const removeBtn = el.querySelector(".remove-fav-btn");
-            if(removeBtn) removeBtn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                favorites = favorites.filter(f => f !== wid);
-                saveFavs();
-                renderFavoritesTab();
-            });
-        });
-    }
-
-    function renderAllNotesTab() {
-        const container = document.getElementById("allNotesContainer");
-        const entries = Object.entries(notesMap);
-        if(!entries.length) { container.innerHTML = '<div style="padding:30px; text-align:center;">📭 لا توجد ملاحظات، أضف ملاحظات أثناء تصفح الكلمات</div>'; return; }
-        let html = '';
-        for(let [wid, noteText] of entries){
-            const wordObj = dictionaryDB.find(w => w.id === wid);
-            const wordName = wordObj ? wordObj.word : wid;
-            html += `<div class="note-item" data-id="${wid}">
-                        <div><strong><i class="fas fa-language"></i> ${wordName}</strong></div>
-                        <div style="background:#00000033; padding:8px 15px; border-radius:20px;">📝 ${noteText.substring(0, 150)}</div>
-                        <button class="icon-btn view-word-note" data-id="${wid}" style="margin-top:10px; background:#6366f1; width:auto; padding:6px 16px;">عرض الكلمة</button>
-                    </div>`;
+    @keyframes slideInLeft {
+        from {            opacity: 0;
+            transform: translateX(-50px);
         }
-        container.innerHTML = html;
-        document.querySelectorAll(".view-word-note").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                const wid = btn.getAttribute("data-id");
-                const wordObj = dictionaryDB.find(w => w.id === wid);
-                if(wordObj) renderResult(wordObj);
-                document.querySelector(".tab-btn[data-tab='dictionaryTab']").click();
-            });
-        });
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
-    // daily word (fixed by date)
-    function setDailyWord() {
-        const today = new Date().toDateString();
-        let dailyIndex = 0;
-        const stored = localStorage.getItem("dailyWordIdx");
-        const storedDate = localStorage.getItem("dailyWordDate");
-        if(storedDate === today && stored) dailyIndex = parseInt(stored);
-        else { dailyIndex = Math.floor(Math.random() * dictionaryDB.length); localStorage.setItem("dailyWordIdx", dailyIndex); localStorage.setItem("dailyWordDate", today); }
-        const dailyWord = dictionaryDB[dailyIndex % dictionaryDB.length];
-        const dailyHtml = `<div><i class="fas fa-star-of-life"></i> <strong style="font-size:1.7rem;">${dailyWord.word}</strong></div>
-                           <div>📖 ${dailyWord.definition}</div>
-                           <div>📌 مثال: ${dailyWord.example || "يزين الحياة"}</div>
-                           <button class="btn-glow" style="margin-top:15px; padding:6px 20px;" id="exploreDailyBtn">استكشف الكلمة</button>`;
-        document.getElementById("dailyWordContainer").innerHTML = dailyHtml;
-        document.getElementById("exploreDailyBtn")?.addEventListener("click",()=>{ renderResult(dailyWord); document.querySelector(".tab-btn[data-tab='dictionaryTab']").click(); });
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
-    // Note auto-save
-    function attachNoteSaver() {
-        const txtArea = document.getElementById("wordNote");
-        if(!txtArea) return;
-        let timeout;
-        txtArea.addEventListener("input", () => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                if(currentDisplayedWord){
-                    notesMap[currentDisplayedWord.id] = txtArea.value;
-                    saveNotes();
-                    document.getElementById("noteSavedStatus").innerHTML = '<i class="fas fa-check-circle"></i> تم حفظ الملاحظة';
-                    setTimeout(()=>{ if(document.getElementById("noteSavedStatus")) document.getElementById("noteSavedStatus").innerHTML = ''; }, 2000);
-                    renderAllNotesTab();
-                }
-            }, 600);
-        });
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
 
-    // Tabs system
-    function initTabs() {
-        const btns = document.querySelectorAll(".tab-btn");
-        const panes = {
-            dictionaryTab: document.getElementById("dictionaryTab"),
-            favoritesTab: document.getElementById("favoritesTab"),
-            notesTab: document.getElementById("notesTab"),
-            dailyTab: document.getElementById("dailyTab")
-        };
-        btns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const tabId = btn.getAttribute("data-tab");
-                Object.keys(panes).forEach(id => { panes[id].classList.remove("active-pane"); });
-                btns.forEach(b => b.classList.remove("active"));
-                panes[tabId].classList.add("active-pane");
-                btn.classList.add("active");
-                if(tabId === "favoritesTab") renderFavoritesTab();
-                if(tabId === "notesTab") renderAllNotesTab();
-                if(tabId === "dailyTab") setDailyWord();
-            });
-        });
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1);
+        }
     }
 
-    // Event listeners & init
-    document.getElementById("searchBtn").addEventListener("click", performSearch);
-    document.getElementById("randomWordBtn").addEventListener("click", randomWord);
-    document.getElementById("searchInput").addEventListener("keypress", (e) => { if(e.key === "Enter") performSearch(); });
-    setTimeout(() => {
-        const splash = document.getElementById("splash-screen");
-        if(splash) { splash.style.opacity = "0"; splash.style.visibility = "hidden"; setTimeout(()=>{ splash.remove(); }, 1300); }
-        document.getElementById("mainApp").classList.add("content-active");
-        updateStatsUI();
-        renderFavoritesTab();
-        renderAllNotesTab();
-        setDailyWord();
-        initTabs();
-        attachNoteSaver();
-        // welcome default word
-        renderResult(dictionaryDB.find(w => w.word === "علم") || dictionaryDB[0]);
-    }, 1000);
-</script>
-</body>
-                                                                        </html>
+    /* ============================================
+       الفئات المساعدة - Utility Classes       ============================================ */
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .text-left { text-align: left; }
+
+    .text-primary { color: var(--text-color-primary); }
+    .text-secondary { color: var(--text-color-secondary); }
+    .text-tertiary { color: var(--text-color-tertiary); }
+    .text-accent { color: var(--accent-color); }
+
+    .bg-glass { background: var(--glass-bg); }
+    .bg-glass-light { background: var(--glass-bg-light); }
+    .bg-glass-dark { background: var(--glass-bg-dark); }
+
+    .rounded-sm { border-radius: var(--radius-sm); }
+    .rounded-md { border-radius: var(--radius-md); }
+    .rounded-lg { border-radius: var(--radius-lg); }
+    .rounded-xl { border-radius: var(--radius-xl); }
+    .rounded-2xl { border-radius: var(--radius-2xl); }
+    .rounded-full { border-radius: var(--radius-full); }
+
+    .shadow-sm { box-shadow: var(--shadow-sm); }
+    .shadow-md { box-shadow: var(--shadow-md); }
+    .shadow-lg { box-shadow: var(--shadow-lg); }
+    .shadow-xl { box-shadow: var(--shadow-xl); }
+    .shadow-2xl { box-shadow: var(--shadow-2xl); }
+    .shadow-glow { box-shadow: var(--shadow-glow); }
+
+    .mt-0 { margin-top: 0; }
+    .mt-1 { margin-top: var(--spacing-xs); }
+    .mt-2 { margin-top: var(--spacing-sm); }
+    .mt-3 { margin-top: var(--spacing-md); }
+    .mt-4 { margin-top: var(--spacing-lg); }
+    .mt-5 { margin-top: var(--spacing-xl); }
+
+    .mb-0 { margin-bottom: 0; }
+    .mb-1 { margin-bottom: var(--spacing-xs); }
+    .mb-2 { margin-bottom: var(--spacing-sm); }
+    .mb-3 { margin-bottom: var(--spacing-md); }
+    .mb-4 { margin-bottom: var(--spacing-lg); }
+    .mb-5 { margin-bottom: var(--spacing-xl); }
+
+    .p-0 { padding: 0; }
+    .p-1 { padding: var(--spacing-xs); }
+    .p-2 { padding: var(--spacing-sm); }
+    .p-3 { padding: var(--spacing-md); }
+    .p-4 { padding: var(--spacing-lg); }
+    .p-5 { padding: var(--spacing-xl); }
+
+    .d-flex { display: flex; }    .d-grid { display: grid; }
+    .d-none { display: none; }
+    .d-block { display: block; }
+    .d-inline { display: inline; }
+    .d-inline-block { display: inline-block; }
+
+    .flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .flex-between {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .flex-wrap { flex-wrap: wrap; }
+    .flex-nowrap { flex-wrap: nowrap; }
+
+    .gap-1 { gap: var(--spacing-xs); }
+    .gap-2 { gap: var(--spacing-sm); }
+    .gap-3 { gap: var(--spacing-md); }
+    .gap-4 { gap: var(--spacing-lg); }
+    .gap-5 { gap: var(--spacing-xl); }
+
+    .w-100 { width: 100%; }
+    .h-100 { height: 100%; }
+
+    .overflow-hidden { overflow: hidden; }
+    .overflow-auto { overflow: auto; }
+
+    .cursor-pointer { cursor: pointer; }
+    
