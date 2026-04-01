@@ -3,82 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مساعد كامبريدج الذكي</title>
+    <title>منصة هانس فير للمترجم المحترف</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; text-align: center; padding: 20px; direction: rtl; }
-        .card { background: white; max-width: 500px; margin: auto; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #1a237e; margin-bottom: 10px; }
-        input { padding: 12px; width: 75%; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 10px; font-size: 16px; }
-        .search-btn { padding: 12px 25px; background: #1a237e; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        #result-area { margin-top: 20px; text-align: right; padding: 15px; background: #f9f9f9; border-radius: 10px; border: 1px solid #eee; }
-        .word-title { font-size: 26px; color: #d32f2f; font-weight: bold; display: block; }
-        .cambridge-btn { 
-            display: block; width: 100%; padding: 15px; margin-top: 20px; 
-            background: #002e5d; color: #ffca28 !important; text-decoration: none; 
-            border-radius: 10px; font-weight: bold; font-size: 16px; 
-            border: 2px solid #ffca28; box-sizing: border-box;
-        }
-        .cambridge-btn:hover { background: #001f40; }
-        .audio-btn { background: #4caf50; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+        :root { --primary: #1a237e; --secondary: #c6a700; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); text-align: center; padding: 20px; direction: rtl; }
+        .card { background: white; max-width: 600px; margin: auto; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 5px solid var(--primary); }
+        h1 { color: var(--primary); margin-bottom: 5px; font-size: 24px; }
+        .subtitle { color: #666; font-size: 13px; margin-bottom: 20px; }
+        input { padding: 15px; width: 80%; border: 2px solid #ddd; border-radius: 30px; margin-bottom: 15px; font-size: 16px; text-align: center; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(26,35,126,0.2); }
+        .search-btn { padding: 12px 30px; background: var(--primary); color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        
+        #result-area { margin-top: 25px; text-align: right; display: none; }
+        .word-header { font-size: 28px; color: #d32f2f; font-weight: bold; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        
+        .hans-wehr-section { background: #fffde7; padding: 15px; border-radius: 10px; border: 1px dashed var(--secondary); margin-top: 15px; }
+        .hans-btn { display: block; width: 100%; padding: 15px; background: var(--secondary); color: #000 !important; text-decoration: none; border-radius: 10px; font-weight: bold; margin-top: 10px; transition: 0.3s; }
+        .hans-btn:hover { background: #fbc02d; }
+
+        .insight-box { margin-top: 20px; background: #e3f2fd; padding: 15px; border-radius: 10px; border-right: 5px solid #2196f3; }
+        .insight-title { font-weight: bold; color: #1565c0; margin-bottom: 5px; display: block; }
+        textarea { width: 100%; border: 1px solid #bbdefb; border-radius: 5px; padding: 10px; box-sizing: border-box; font-family: inherit; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h1>مساعد كامبريدج الذكي 🔎</h1>
-        <p>البحث المباشر في قواميس كامبريدج المعتمدة</p>
+        <h1>مساعد Hans Wehr للمترجم 🔎</h1>
+        <p class="subtitle">الدقة اللغوية وتحليل الجذور العربية-الإنجليزية</p>
         
-        <input type="text" id="userInput" placeholder="اكتب الكلمة بالإنجليزية...">
-        <button class="search-btn" onclick="getTranslation()">بحث</button>
+        <input type="text" id="userInput" placeholder="اكتب الكلمة (الإنجليزية أو العربية)...">
+        <br>
+        <button class="search-btn" onclick="processSearch()">تحليل المصطلح</button>
         
-        <div id="result-area" style="display: none;"></div>
+        <div id="result-area">
+            <div class="word-header" id="displayWord"></div>
+            
+            <div class="hans-wehr-section">
+                <strong>المرجع المعتمد: Hans Wehr Dictionary</strong>
+                <p style="font-size: 14px;">للحصول على أدق ترجمة للجذور والفروق اللغوية:</p>
+                <a id="hansLink" href="#" target="_blank" class="hans-btn">📖 فتح صفحة المصطلح في Hans Wehr</a>
+            </div>
+
+            <div class="insight-box">
+                <span class="insight-title">💡 بصيرتك الشخصية حول المصطلح:</span>
+                <textarea id="myNotes" rows="4" placeholder="اكتب هنا فهمك الخاص للمصطلح (مثلاً: الفرق بين العجز وفقدان السيطرة)..."></textarea>
+                <p style="font-size: 11px; color: #757575;">* هذه الملاحظات تحفظ في متصفحك للرجوع إليها.</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        async function getTranslation() {
-            const word = document.getElementById('userInput').value.trim().toLowerCase();
+        function processSearch() {
+            const word = document.getElementById('userInput').value.trim();
             const resultArea = document.getElementById('result-area');
-            
-            if (!word) { alert("يرجى إدخال كلمة"); return; }
+            const displayWord = document.getElementById('displayWord');
+            const hansLink = document.getElementById('hansLink');
+
+            if (!word) { alert("يرجى إدخال الكلمة أولاً"); return; }
+
             resultArea.style.display = "block";
-            resultArea.innerHTML = "جاري جلب البيانات...";
+            displayWord.innerText = word.toUpperCase();
 
-            try {
-                const response = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word);
-                const data = await response.json();
+            // ربط ذكي بموسوعة المعاجم التي تضم Hans Wehr
+            // ملاحظة: Hans Wehr يبحث بالجذر، لذا نوجه المستخدم للمنصة الأفضل لعرضه
+            hansLink.href = `https://ejtaal.net/aa/#hw4=${word.toLowerCase()}`;
 
-                // هذا هو الرابط الذي سيفتح صفحة الترجمة العربية في كامبريدج
-                const cambridgeUrl = `https://dictionary.cambridge.org/dictionary/english-arabic/${word}`;
+            // استعادة الملاحظات القديمة إن وجدت
+            const savedNotes = localStorage.getItem('note_' + word.toLowerCase());
+            document.getElementById('myNotes').value = savedNotes || "";
+        }
 
-                if (data.title === "No Definitions Found") {
-                    resultArea.innerHTML = `
-                        <div style="color: red; margin-bottom: 10px;">لم نجد تعريفاً سريعاً، جرب القاموس الكامل:</div>
-                        <a href="${cambridgeUrl}" target="_blank" class="cambridge-btn">فتح صفحة الترجمة في Cambridge</a>
-                    `;
-                } else {
-                    const def = data[0].meanings[0].definitions[0].definition;
-                    resultArea.innerHTML = `
-                        <span class="word-title">${word.toUpperCase()}</span>
-                        <div style="margin-top:10px;"><b>المعنى بالإنجليزي:</b><br>${def}</div>
-                        <button class="audio-btn" onclick="playAudio('${word}')">🔊 استمع للنطق</button>
-                        
-                        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
-                        
-                        <a href="${cambridgeUrl}" target="_blank" class="cambridge-btn">
-                             📖 عرض الترجمة العربية في Cambridge
-                        </a>
-                    `;
-                }
-            } catch (e) {
-                resultArea.innerHTML = "⚠️ تأكد من الاتصال بالإنترنت.";
+        // حفظ الملاحظات تلقائياً عند الكتابة
+        document.getElementById('myNotes').addEventListener('input', function() {
+            const word = document.getElementById('userInput').value.trim().toLowerCase();
+            if(word) {
+                localStorage.setItem('note_' + word, this.value);
             }
-        }
-
-        function playAudio(word) {
-            const utter = new SpeechSynthesisUtterance(word);
-            utter.lang = 'en-US';
-            window.speechSynthesis.speak(utter);
-        }
+        });
     </script>
 </body>
 </html>
